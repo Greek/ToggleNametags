@@ -10,7 +10,7 @@ import static dev.yeat.togglenametags.togglenametags.client.TogglenametagsClient
 
 @Mixin(EntityRenderer.class)
 public class RenderNametagMixin {
-    @Inject(at = @At("HEAD"), method= "render", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void doNotRender(CallbackInfo ci) {
         if (shouldRender) {
             return;

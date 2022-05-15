@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.LiteralText;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
@@ -30,10 +32,12 @@ public class TogglenametagsClient implements ClientModInitializer {
             while (keyBinding.wasPressed()) {
                 if (shouldRender) {
                     shouldRender = false;
-                    client.player.sendMessage(new LiteralText("Nametags are now hidden!"), false);
+                    client.player.sendSystemMessage(new LiteralText("Nametags are now hidden!").styled(style ->
+                            style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
                 } else {
                     shouldRender = true;
-                    client.player.sendMessage(new LiteralText("Nametags are now shown!"), false);
+                    client.player.sendSystemMessage(new LiteralText("Nametags are now shown!").styled(style ->
+                            style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
                 }
             }
         });
