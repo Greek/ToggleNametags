@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "RenderNametagMixin"
+    "dev.yeat.togglenametags.mixin.RenderNametagMixin"
   ],
   "injectors": {
     "defaultRequire": 1

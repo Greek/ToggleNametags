@@ -15,10 +15,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "dev.yeat.togglenametags.togglenametags.client.TogglenametagsClient"
+      "dev.yeat.togglenametags.client.TogglenametagsClient"
     ],
     "main": [
-      "dev.yeat.togglenametags.togglenametags.Togglenametags"
+      "dev.yeat.togglenametags.Togglenametags"
     ]
   },
   "mixins": [

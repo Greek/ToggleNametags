@@ -1,4 +1,4 @@
-package dev.yeat.togglenametags.togglenametags.client;
+package dev.yeat.togglenametags.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

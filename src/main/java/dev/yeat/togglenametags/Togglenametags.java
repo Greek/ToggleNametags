@@ -1,4 +1,4 @@
-package dev.yeat.togglenametags.togglenametags;
+package dev.yeat.togglenametags;
 
 import net.fabricmc.api.ModInitializer;
 
