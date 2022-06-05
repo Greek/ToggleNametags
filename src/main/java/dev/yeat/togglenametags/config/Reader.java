@@ -13,7 +13,7 @@ public class Reader {
         }
     }
 
-    private static String ltProvider(String filename) {
+    public static String ltProvider(String filename) {
         return "# Toggle Nametags settings."
                 + "\nrender_all_except_players=" + renderOtherEntities;
     }

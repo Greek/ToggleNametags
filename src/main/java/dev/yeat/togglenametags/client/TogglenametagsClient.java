@@ -1,12 +1,16 @@
 package dev.yeat.togglenametags.client;
 
+import dev.yeat.togglenametags.config.Reader;
+import dev.yeat.togglenametags.config.SimpleConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
@@ -40,6 +44,21 @@ public class TogglenametagsClient implements ClientModInitializer {
                             style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
                 }
             }
+        });
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            SimpleConfig config = SimpleConfig.of("ToggleNametagsConfig").provider(Reader::ltProvider).request();
+
+            dispatcher.register(CommandManager.literal("toggleothernametags").executes(context -> {
+                if (Reader.renderOtherEntities) {
+                    Reader.renderOtherEntities = false;
+                    config.getOrDefault("render_all_except_players", false);
+                } else {
+                    Reader.renderOtherEntities = true;
+                    config.getOrDefault("render_all_except_players", true);
+                }
+                return 1;
+            }));
         });
     }
 }
