@@ -1,12 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "dev.yeat.togglenametags.togglenametags.mixin",
+  "package": "dev.yeat.togglenametags.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
   "client": [
-    "dev.yeat.togglenametags.mixin.RenderNametagMixin"
+    "RenderNametagMixin"
   ],
   "injectors": {
     "defaultRequire": 1
