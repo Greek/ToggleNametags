@@ -6,6 +6,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -24,10 +25,14 @@ public abstract class RenderNametagMixin<T extends Entity> {
                 if (entity instanceof PlayerEntity) {
                     ci.cancel();
                 }
-            } else {
-                ci.cancel();
-            }
-        }
+                // Should we not render Armor Stand labels?
+//                if (entity instanceof ArmorStandEntity) {
+//                    ci.cancel();
+//                }
 
+                } else {
+                    ci.cancel();
+                }
+            }
     }
 }
