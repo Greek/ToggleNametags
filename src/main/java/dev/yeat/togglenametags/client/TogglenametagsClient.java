@@ -7,14 +7,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.minecraft.client.input.Input;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
@@ -45,12 +41,12 @@ public class TogglenametagsClient implements ClientModInitializer {
             while (keyBinding.wasPressed()) {
                 if (shouldRender) {
                     shouldRender = false;
-                    client.player.sendSystemMessage(new LiteralText("Nametags are now hidden!").styled(style ->
-                            style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
+                    client.player.sendMessage(Text.literal("Nametags are now hidden!").styled(style ->
+                            style.withColor(Formatting.DARK_GRAY)), false);
                 } else {
                     shouldRender = true;
-                    client.player.sendSystemMessage(new LiteralText("Nametags are now shown!").styled(style ->
-                            style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
+                    client.player.sendMessage(Text.literal("Nametags are now shown!").styled(style ->
+                            style.withColor(Formatting.DARK_GRAY)), false);
                 }
             }
 
@@ -60,13 +56,13 @@ public class TogglenametagsClient implements ClientModInitializer {
                 if (Reader.renderOtherEntities) {
                     Reader.renderOtherEntities = false;
                     config.getOrDefault("render_all_except_players", false);
-                    client.player.sendSystemMessage(new LiteralText("Nametags from other entities are now hidden!").styled(style ->
-                            style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
+                    client.player.sendMessage(Text.literal("Nametags from other entities are now hidden!").styled(style ->
+                            style.withColor(Formatting.DARK_GRAY)), false);
                 } else {
                     Reader.renderOtherEntities = true;
                     config.getOrDefault("render_all_except_players", true);
-                    client.player.sendSystemMessage(new LiteralText("Nametags from other entities are now shown!").styled(style ->
-                            style.withColor(Formatting.DARK_GRAY)), Util.NIL_UUID);
+                    client.player.sendMessage(Text.literal("Nametags from other entities are now shown!").styled(style ->
+                            style.withColor(Formatting.DARK_GRAY)), false);
                 }
             }
         });

@@ -25,10 +25,12 @@ public abstract class RenderNametagMixin<T extends Entity> {
                 if (entity instanceof PlayerEntity) {
                     ci.cancel();
                 }
-                // Should we not render Armor Stand labels?
-//                if (entity instanceof ArmorStandEntity) {
-//                    ci.cancel();
-//                }
+
+                // Armor stands are used as nametags on some servers
+                // we'll pretend they're players too.
+                if (entity instanceof ArmorStandEntity) {
+                    ci.cancel();
+                }
 
                 } else {
                     ci.cancel();
