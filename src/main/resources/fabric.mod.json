@@ -3,12 +3,11 @@
 	"id": "togglenametags",
 	"version": "${version}",
 	"name": "ToggleNametags",
-	"description": "A mod that allows you to toggle your nametags.",
+	"description": "Hide and toggle nametags in-game.",
 	"authors": [
-		"Andreas <a@ndy.sh>"
+		"andweas <a@ndy.sh>"
 	],
 	"contact": {
-		"homepage": "https://github.com/Greek/ToggleNametags",
 		"sources": "https://github.com/Greek/ToggleNametags"
 	},
 	"license": "CC0-1.0",
@@ -31,7 +30,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.15.10",
-		"minecraft": ">=1.20.5",
+		"minecraft": ">=1.21",
 		"java": ">=21",
 		"fabric-api": "*"
 	}
