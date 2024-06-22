@@ -4,9 +4,11 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"MixinRenderNameTag",
-		"MixinRenderSelfNameTag"
+		"MixinRenderSelfNameTag",
+		"MixinRenderBossBar"
 	],
 	"injectors": {
 		"defaultRequire": 1
-	}
+	},
+	"mixins": []
 }
