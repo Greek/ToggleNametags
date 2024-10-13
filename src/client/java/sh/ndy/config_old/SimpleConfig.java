@@ -1,4 +1,4 @@
-package sh.ndy.config;
+package sh.ndy.config_old;
 
 /*
  * Copyright (c) 2021 magistermaks

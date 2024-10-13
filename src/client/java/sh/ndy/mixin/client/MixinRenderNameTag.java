@@ -1,7 +1,5 @@
 package sh.ndy.mixin.client;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -13,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sh.ndy.ToggleNametagsClient;
-import sh.ndy.config.Reader;
+import sh.ndy.config_old.Reader;
 
 @Mixin(EntityRenderer.class)
 public class MixinRenderNameTag<T extends Entity> {

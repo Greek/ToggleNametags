@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sh.ndy.config.Reader;
+import sh.ndy.config_old.Reader;
 
 @Mixin(LivingEntityRenderer.class)
 public class MixinRenderSelfNameTag<T extends LivingEntity> {

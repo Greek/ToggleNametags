@@ -8,8 +8,8 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
-import sh.ndy.config.Reader;
-import sh.ndy.config.SimpleConfig;
+import sh.ndy.config_old.Reader;
+import sh.ndy.config_old.SimpleConfig;
 
 public class ToggleNametagsClient implements ClientModInitializer {
 	private static KeyBinding renderNametagsKeybinding;
