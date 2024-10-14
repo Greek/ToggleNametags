@@ -14,17 +14,13 @@
 	"icon": "assets/togglenametags/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
-			"sh.ndy.ToggleNametags"
-		],
 		"client": [
 			"sh.ndy.ToggleNametagsClient"
 		]
 	},
 	"mixins": [
-		"togglenametags.mixins.json",
 		{
-			"config": "togglenametags.client.mixins.json",
+			"config": "togglenametags.mixins.json",
 			"environment": "client"
 		}
 	],
