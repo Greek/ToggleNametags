@@ -9,7 +9,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 import sh.ndy.config.Config;
-import sh.ndy.config.Options;
 
 public class ToggleNametagsClient implements ClientModInitializer {
 	private static KeyBinding renderNametagsKeybinding;
