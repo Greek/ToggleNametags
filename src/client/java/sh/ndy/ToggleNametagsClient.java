@@ -56,7 +56,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
 					client.player.sendMessage(Text.literal("Nametags are now hidden!").styled(style ->
 							style.withColor(Formatting.DARK_GRAY)), false);
 				} else {
-					Config.getOptions().setRenderNametags(false);
+					Config.getOptions().setRenderNametags(true);
 
 					if (client.player == null) return;
 					client.player.sendMessage(Text.literal("Nametags are now shown!").styled(style ->
