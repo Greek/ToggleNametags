@@ -8,6 +8,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
+import sh.ndy.config.Options;
 import sh.ndy.config_old.Reader;
 import sh.ndy.config_old.SimpleConfig;
 
@@ -22,6 +23,8 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		Options options = new Options(true, true, false);
+
 		renderNametagsKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"Toggle Nametags", // The translation key of the keybinding's name
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
