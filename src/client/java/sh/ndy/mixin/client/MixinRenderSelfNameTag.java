@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sh.ndy.config.Reader;
+import sh.ndy.config.Config;
 
 @Mixin(LivingEntityRenderer.class)
 public class MixinRenderSelfNameTag<T extends LivingEntity> {
@@ -17,7 +17,7 @@ public class MixinRenderSelfNameTag<T extends LivingEntity> {
             cancellable = true
     )
     private void viewOwnLabel(T livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (Reader.renderOwnNametag && livingEntity == MinecraftClient.getInstance().cameraEntity) {
+        if (Config.getOptions().getRenderSelfNametag() && livingEntity == MinecraftClient.getInstance().cameraEntity) {
             cir.setReturnValue(true);
         };
     }
