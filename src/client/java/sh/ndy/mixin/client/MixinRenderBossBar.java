@@ -11,8 +11,10 @@ import sh.ndy.config.Config;
 public class MixinRenderBossBar {
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void render(CallbackInfo ci) {
-        if (Config.getOptions().getRenderBossbar())
+        if (Config.getOptions().getRenderBossbar()) {
             return;
+        }
+
         ci.cancel();
     }
 }
