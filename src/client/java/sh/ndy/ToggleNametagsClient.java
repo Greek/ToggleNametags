@@ -12,7 +12,6 @@ import sh.ndy.config.Config;
 
 public class ToggleNametagsClient implements ClientModInitializer {
 	private static KeyBinding renderNametagsKeybinding;
-	private static KeyBinding renderAllExceptPlayersKeybinding;
 	private static KeyBinding renderBossBarKeybinding;
 	private static KeyBinding renderSelfNametagKeybinding;
 
@@ -25,13 +24,6 @@ public class ToggleNametagsClient implements ClientModInitializer {
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
 				GLFW.GLFW_KEY_MINUS, // The keycode of the key
 				"Nametags" // The translation key of the keybinding's category.
-		));
-
-		renderAllExceptPlayersKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"Toggle Other Nametags",
-				InputUtil.Type.KEYSYM,
-				GLFW.GLFW_KEY_EQUAL,
-				"Nametags"
 		));
 
 		renderBossBarKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -60,24 +52,6 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
 					if (client.player == null) return;
 					client.player.sendMessage(Text.literal("Nametags are now shown!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				}
-
-				Config.saveConfig();
-			}
-
-			while (renderAllExceptPlayersKeybinding.wasPressed()) {
-				if (Config.getOptions().getRenderEntityNametags()) {
-					Config.getOptions().setRenderEntityNametags(false);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("Nametags from other entities are now hidden!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				} else {
-					Config.getOptions().setRenderEntityNametags(true);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("Nametags from other entities are now shown!").styled(style ->
 							style.withColor(Formatting.DARK_GRAY)), false);
 				}
 

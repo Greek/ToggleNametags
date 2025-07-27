@@ -2,9 +2,8 @@ package sh.ndy.config;
 
 public class Options {
     public boolean renderNametags = true;
-    public boolean renderEntityNametags = true; // Non-player nametags
     public boolean renderSelfNametag = false;
-    public  boolean renderBossbar = true;
+    public boolean renderBossbar = true;
 
     public boolean getRenderNametags() {
         return renderNametags;
@@ -12,14 +11,6 @@ public class Options {
 
     public void setRenderNametags(boolean toggle) {
         this.renderNametags = toggle;
-    }
-
-    public boolean getRenderEntityNametags() {
-        return renderEntityNametags;
-    }
-
-    public void setRenderEntityNametags(boolean toggle) {
-        this.renderEntityNametags = toggle;
     }
 
     public boolean getRenderSelfNametag() {
