@@ -4,9 +4,11 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.option.KeyBinding.Category;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import sh.ndy.config.Config;
 
@@ -18,25 +20,26 @@ public class ToggleNametagsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		Config.loadConfig();
+		Category NametagsCategory = new Category(Identifier.of("toggle_nametags"));
 
 		renderNametagsKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"Toggle Nametags", // The translation key of the keybinding's name
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
 				GLFW.GLFW_KEY_MINUS, // The keycode of the key
-				"Nametags" // The translation key of the keybinding's category.
+				NametagsCategory // The translation key of the keybinding's category.
 		));
 
 		renderBossBarKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"Toggle Boss Bar",
 				InputUtil.Type.KEYSYM,
 				GLFW.GLFW_KEY_M,
-				"Nametags"
+				NametagsCategory
 		));
 
 		renderSelfNametagKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("Show your own nametag",
 				InputUtil.Type.KEYSYM,
 				GLFW.GLFW_KEY_RIGHT_BRACKET,
-				"Nametags"
+				NametagsCategory
 		));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {

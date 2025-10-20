@@ -1,8 +1,10 @@
 package sh.ndy.mixin.client;
 
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
@@ -17,7 +19,7 @@ import sh.ndy.config.Config;
 @Mixin(EntityRenderer.class)
 public class MixinRenderNameTag<T extends Entity, S extends EntityRenderState> {
     @Inject(at = @At("HEAD"), method = "renderLabelIfPresent", cancellable = true)
-    private void doNotRender(S state, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+    private void doNotRender(S state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraRenderState, CallbackInfo ci) {
         if (Config.getOptions().getRenderNametags()) {
             return;
         }
