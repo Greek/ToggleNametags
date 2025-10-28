@@ -6,6 +6,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import sh.ndy.bindings.Bindings;
+import sh.ndy.bindings.listeners.NametagsToggleListener;
 import sh.ndy.config.Config;
 
 public class ToggleNametagsClient implements ClientModInitializer {
@@ -20,21 +21,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (renderNametagsKeybinding.wasPressed()) {
-				if (Config.getOptions().getRenderNametags()) {
-					Config.getOptions().setRenderNametags(false);
-
-					if (client.player == null) return;
-					client.player.sendMessage(Text.literal("Nametags are now hidden!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				} else {
-					Config.getOptions().setRenderNametags(true);
-
-					if (client.player == null) return;
-					client.player.sendMessage(Text.literal("Nametags are now shown!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				}
-
-				Config.saveConfig();
+                NametagsToggleListener.handleEvent(client, renderNametagsKeybinding);
 			}
 
 			while (renderBossBarKeybinding.wasPressed()) {
