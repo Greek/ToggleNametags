@@ -29,13 +29,14 @@ public class Bindings {
     }
 
     public static void registerAll() {
+        KeyBinding.Category category = new KeyBinding.Category(Identifier.of(CATEGORY_NAME));
         for (Action a : Action.values()) {
             a.binding = KeyBindingHelper.registerKeyBinding(
                     new KeyBinding(
                             a.label,
                             InputUtil.Type.KEYSYM,
                             a.defaultKey,
-                            new KeyBinding.Category(Identifier.of(CATEGORY_NAME))
+                            category
                     )
             );
         }
