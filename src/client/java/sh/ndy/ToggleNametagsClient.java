@@ -3,8 +3,6 @@ package sh.ndy;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import sh.ndy.bindings.Bindings;
 import sh.ndy.bindings.listeners.NametagsToggleListener;
 import sh.ndy.bindings.listeners.BossbarToggleListener;

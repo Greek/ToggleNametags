@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class Bindings {
-    private static String CATEGORY_NAME = "toggle_nametags";
+    private static final String CATEGORY_NAME = "toggle_nametags";
 
     public enum Action {
         TOGGLE_NAMETAGS("Toggle Nametags", GLFW.GLFW_KEY_MINUS),

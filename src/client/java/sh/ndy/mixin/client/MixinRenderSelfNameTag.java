@@ -16,6 +16,5 @@ public class MixinRenderSelfNameTag<T extends LivingEntity> {
         if (Config.getOptions().getRenderSelfNametag() && livingEntity == MinecraftClient.getInstance().getCameraEntity()) {
             cir.setReturnValue(true);
         }
-        ;
     }
 }
