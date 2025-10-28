@@ -2,99 +2,34 @@ package sh.ndy;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.option.KeyBinding.Category;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import org.lwjgl.glfw.GLFW;
+import sh.ndy.bindings.Bindings;
+import sh.ndy.bindings.listeners.NametagsToggleListener;
+import sh.ndy.bindings.listeners.BossbarToggleListener;
+import sh.ndy.bindings.listeners.SelfNametagToggleListener;
 import sh.ndy.config.Config;
 
 public class ToggleNametagsClient implements ClientModInitializer {
-	private static KeyBinding renderNametagsKeybinding;
-	private static KeyBinding renderBossBarKeybinding;
-	private static KeyBinding renderSelfNametagKeybinding;
-
 	@Override
 	public void onInitializeClient() {
 		Config.loadConfig();
-		Category NametagsCategory = new Category(Identifier.of("toggle_nametags"));
+        Bindings.registerAll();
 
-		renderNametagsKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"Toggle Nametags", // The translation key of the keybinding's name
-				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-				GLFW.GLFW_KEY_MINUS, // The keycode of the key
-				NametagsCategory // The translation key of the keybinding's category.
-		));
-
-		renderBossBarKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"Toggle Boss Bar",
-				InputUtil.Type.KEYSYM,
-				GLFW.GLFW_KEY_M,
-				NametagsCategory
-		));
-
-		renderSelfNametagKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("Show your own nametag",
-				InputUtil.Type.KEYSYM,
-				GLFW.GLFW_KEY_RIGHT_BRACKET,
-				NametagsCategory
-		));
+        KeyBinding renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
+        KeyBinding renderBossBarKeybinding = Bindings.Action.TOGGLE_BOSS_BAR.binding();
+        KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (renderNametagsKeybinding.wasPressed()) {
-				if (Config.getOptions().getRenderNametags()) {
-					Config.getOptions().setRenderNametags(false);
-
-					if (client.player == null) return;
-					client.player.sendMessage(Text.literal("Nametags are now hidden!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				} else {
-					Config.getOptions().setRenderNametags(true);
-
-					if (client.player == null) return;
-					client.player.sendMessage(Text.literal("Nametags are now shown!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				}
-
-				Config.saveConfig();
+                NametagsToggleListener.handleEvent(client, renderNametagsKeybinding);
 			}
 
 			while (renderBossBarKeybinding.wasPressed()) {
-				if (Config.getOptions().getRenderBossbar()) {
-					Config.getOptions().setRenderBossbar(false);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("The bossbar is now hidden!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				} else {
-					Config.getOptions().setRenderBossbar(true);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("The bossbar is now shown!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				}
-
-				Config.saveConfig();
+                BossbarToggleListener.handleEvent(client, renderBossBarKeybinding);
 			}
 
 			while (renderSelfNametagKeybinding.wasPressed()) {
-				if (Config.getOptions().getRenderSelfNametag()) {
-					Config.getOptions().setRenderSelfNametag(false);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("Your nametag is hidden!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				} else {
-					Config.getOptions().setRenderSelfNametag(true);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("You can see your own nametag!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				}
-
-				Config.saveConfig();
+                SelfNametagToggleListener.handleEvent(client, renderSelfNametagKeybinding);
 			}
 
 		});
