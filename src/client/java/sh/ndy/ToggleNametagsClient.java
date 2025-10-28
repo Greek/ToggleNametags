@@ -7,6 +7,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import sh.ndy.bindings.Bindings;
 import sh.ndy.bindings.listeners.NametagsToggleListener;
+import sh.ndy.bindings.listeners.BossbarToggleListener;
 import sh.ndy.config.Config;
 
 public class ToggleNametagsClient implements ClientModInitializer {
@@ -25,21 +26,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
 			}
 
 			while (renderBossBarKeybinding.wasPressed()) {
-				if (Config.getOptions().getRenderBossbar()) {
-					Config.getOptions().setRenderBossbar(false);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("The bossbar is now hidden!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				} else {
-					Config.getOptions().setRenderBossbar(true);
-					if (client.player == null) return;
-
-					client.player.sendMessage(Text.literal("The bossbar is now shown!").styled(style ->
-							style.withColor(Formatting.DARK_GRAY)), false);
-				}
-
-				Config.saveConfig();
+                BossbarToggleListener.handleEvent(client, renderBossBarKeybinding);
 			}
 
 			while (renderSelfNametagKeybinding.wasPressed()) {
