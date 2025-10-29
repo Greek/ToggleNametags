@@ -9,12 +9,12 @@ import sh.ndy.config.Config;
 
 @Mixin(BossBarHud.class)
 public class MixinRenderBossBar {
-    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
-    private void render(CallbackInfo ci) {
-        if (Config.getOptions().getRenderBossbar()) {
-            return;
-        }
+  @Inject(at = @At("HEAD"), method = "render", cancellable = true)
+  private void render(CallbackInfo ci) {
+	if (Config.getOptions().getRenderBossbar()) {
+	  return;
+	}
 
-        ci.cancel();
-    }
+	ci.cancel();
+  }
 }

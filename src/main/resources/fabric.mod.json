@@ -1,37 +1,37 @@
 {
-	"schemaVersion": 1,
-	"id": "togglenametags",
-	"version": "${version}",
-	"name": "ToggleNametags",
-	"description": "Hide and toggle nametags in-game.",
-	"authors": [
-		"andweas <a@ndy.sh>"
-	],
-	"contact": {
-		"sources": "https://github.com/Greek/ToggleNametags"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/togglenametags/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"sh.ndy.ToggleNametags"
-		],
-		"client": [
-			"sh.ndy.ToggleNametagsClient"
-		]
-	},
-	"mixins": [
-		"togglenametags.mixins.json",
-		{
-			"config": "togglenametags.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.15.10",
-		"minecraft": ">=1.21.10- <1.21.11-",
-		"java": ">=17",
-		"fabric-api": "*"
-	}
+  "schemaVersion": 1,
+  "id": "togglenametags",
+  "version": "${version}",
+  "name": "ToggleNametags",
+  "description": "Hide and toggle nametags in-game.",
+  "authors": [
+    "andweas <a@ndy.sh>"
+  ],
+  "contact": {
+    "sources": "https://github.com/Greek/ToggleNametags"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/togglenametags/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "sh.ndy.ToggleNametags"
+    ],
+    "client": [
+      "sh.ndy.ToggleNametagsClient"
+    ]
+  },
+  "mixins": [
+    "togglenametags.mixins.json",
+    {
+      "config": "togglenametags.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.10",
+    "minecraft": ">=1.21.10- <1.21.11-",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
 }

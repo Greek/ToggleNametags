@@ -1,14 +1,14 @@
 {
-	"required": true,
-	"package": "sh.ndy.mixin.client",
-	"compatibilityLevel": "JAVA_17",
-	"client": [
-		"MixinRenderNameTag",
-		"MixinRenderSelfNameTag",
-		"MixinRenderBossBar"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"mixins": []
+  "required": true,
+  "package": "sh.ndy.mixin.client",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "MixinRenderBossBar",
+    "MixinRenderNameTag",
+    "MixinRenderSelfNameTag"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": []
 }

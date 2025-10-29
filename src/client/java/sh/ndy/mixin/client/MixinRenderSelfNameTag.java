@@ -11,10 +11,10 @@ import sh.ndy.config.Config;
 
 @Mixin(LivingEntityRenderer.class)
 public class MixinRenderSelfNameTag<T extends LivingEntity> {
-    @Inject(at = @At("HEAD"), method = "hasLabel(Lnet/minecraft/entity/LivingEntity;D)Z", cancellable = true)
-    private void viewOwnLabel(T livingEntity, double d, CallbackInfoReturnable<Boolean> cir) {
-        if (Config.getOptions().getRenderSelfNametag() && livingEntity == MinecraftClient.getInstance().getCameraEntity()) {
-            cir.setReturnValue(true);
-        }
-    }
+  @Inject(at = @At("HEAD"), method = "hasLabel(Lnet/minecraft/entity/LivingEntity;D)Z", cancellable = true)
+  private void viewOwnLabel(T livingEntity, double d, CallbackInfoReturnable<Boolean> cir) {
+	if (Config.getOptions().getRenderSelfNametag() && livingEntity == MinecraftClient.getInstance().getCameraEntity()) {
+	  cir.setReturnValue(true);
+	}
+  }
 }
