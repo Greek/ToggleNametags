@@ -15,7 +15,8 @@ import sh.ndy.config.Config;
 @Mixin(EntityRenderer.class)
 public class MixinRenderNameTag<T extends Entity, S extends EntityRenderState> {
   @Inject(at = @At("HEAD"), method = "renderLabelIfPresent", cancellable = true)
-  private void doNotRender(S state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraRenderState, CallbackInfo ci) {
+  private void doNotRender(S state, MatrixStack matrices, OrderedRenderCommandQueue queue,
+						   CameraRenderState cameraRenderState, CallbackInfo ci) {
 	if (Config.getOptions().getRenderNametags()) {
 	  return;
 	}
