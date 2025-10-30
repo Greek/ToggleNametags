@@ -4,7 +4,10 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sh.ndy.config.Config;
+
+import javax.security.auth.callback.Callback;
 
 public class BossbarToggleListener implements IBaseBindingListener {
   public void handleBinding(MinecraftClient client, KeyBinding binding) {
@@ -22,4 +25,11 @@ public class BossbarToggleListener implements IBaseBindingListener {
 	}
   }
 
+  public void handleMixin(CallbackInfo ci) {
+	if (Config.getOptions().getRenderBossbar()) {
+	  return;
+	}
+
+	ci.cancel();
+  }
 }

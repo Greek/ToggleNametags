@@ -5,16 +5,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sh.ndy.config.Config;
+import sh.ndy.features.listeners.BossbarToggleListener;
 
 @Mixin(BossBarHud.class)
 public class MixinRenderBossBar {
+  private static final BossbarToggleListener listener = new BossbarToggleListener();
+
   @Inject(at = @At("HEAD"), method = "render", cancellable = true)
   private void render(CallbackInfo ci) {
-	if (Config.getOptions().getRenderBossbar()) {
-	  return;
-	}
-
-	ci.cancel();
+	listener.handleMixin(ci);
   }
 }
