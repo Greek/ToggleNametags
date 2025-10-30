@@ -3,10 +3,10 @@ package sh.ndy;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.option.KeyBinding;
-import sh.ndy.bindings.Bindings;
-import sh.ndy.bindings.listeners.BossbarToggleListener;
-import sh.ndy.bindings.listeners.NametagsToggleListener;
-import sh.ndy.bindings.listeners.SelfNametagToggleListener;
+import sh.ndy.features.Bindings;
+import sh.ndy.features.listeners.BossbarToggleListener;
+import sh.ndy.features.listeners.NametagsToggleListener;
+import sh.ndy.features.listeners.SelfNametagToggleListener;
 import sh.ndy.config.Config;
 
 public class ToggleNametagsClient implements ClientModInitializer {
@@ -21,15 +21,15 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
 	ClientTickEvents.END_CLIENT_TICK.register(client -> {
 	  while (renderNametagsKeybinding.wasPressed()) {
-		NametagsToggleListener.handleEvent(client, renderNametagsKeybinding);
+		new NametagsToggleListener().handleBinding(client, renderNametagsKeybinding);
 	  }
 
 	  while (renderBossBarKeybinding.wasPressed()) {
-		BossbarToggleListener.handleEvent(client, renderBossBarKeybinding);
+		new BossbarToggleListener().handleBinding(client, renderBossBarKeybinding);
 	  }
 
 	  while (renderSelfNametagKeybinding.wasPressed()) {
-		SelfNametagToggleListener.handleEvent(client, renderSelfNametagKeybinding);
+		new SelfNametagToggleListener().handleBinding(client, renderSelfNametagKeybinding);
 	  }
 
 	});

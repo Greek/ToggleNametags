@@ -1,4 +1,4 @@
-package sh.ndy.bindings;
+package sh.ndy.features;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;

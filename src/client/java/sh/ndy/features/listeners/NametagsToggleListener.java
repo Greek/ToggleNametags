@@ -1,4 +1,4 @@
-package sh.ndy.bindings.listeners;
+package sh.ndy.features.listeners;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -7,7 +7,7 @@ import net.minecraft.util.Formatting;
 import sh.ndy.config.Config;
 
 public class NametagsToggleListener implements IBaseBindingListener {
-  public static void handleEvent(MinecraftClient client, KeyBinding binding) {
+  public void handleBinding(MinecraftClient client, KeyBinding binding) {
 	if (client.player == null) return;
 
 	Config.getOptions().setRenderNametags(!Config.getOptions().getRenderNametags());
