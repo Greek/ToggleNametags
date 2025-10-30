@@ -16,20 +16,25 @@ public class ToggleNametagsClient implements ClientModInitializer {
 	Bindings.registerAll();
 
 	KeyBinding renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
+	NametagsToggleListener nametagsToggleListener = new NametagsToggleListener();
+
 	KeyBinding renderBossBarKeybinding = Bindings.Action.TOGGLE_BOSS_BAR.binding();
+	BossbarToggleListener bossbarToggleListener = new BossbarToggleListener();
+
 	KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
+	SelfNametagToggleListener selfNametagToggleListener = new SelfNametagToggleListener();
 
 	ClientTickEvents.END_CLIENT_TICK.register(client -> {
 	  while (renderNametagsKeybinding.wasPressed()) {
-		new NametagsToggleListener().handleBinding(client, renderNametagsKeybinding);
+		nametagsToggleListener.handleBinding(client, renderNametagsKeybinding);
 	  }
 
 	  while (renderBossBarKeybinding.wasPressed()) {
-		new BossbarToggleListener().handleBinding(client, renderBossBarKeybinding);
+		bossbarToggleListener.handleBinding(client, renderBossBarKeybinding);
 	  }
 
 	  while (renderSelfNametagKeybinding.wasPressed()) {
-		new SelfNametagToggleListener().handleBinding(client, renderSelfNametagKeybinding);
+		selfNametagToggleListener.handleBinding(client, renderSelfNametagKeybinding);
 	  }
 
 	});
