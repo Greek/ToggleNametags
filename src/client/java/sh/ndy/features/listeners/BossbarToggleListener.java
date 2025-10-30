@@ -1,13 +1,14 @@
-package sh.ndy.bindings.listeners;
+package sh.ndy.features.listeners;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sh.ndy.config.Config;
 
 public class BossbarToggleListener implements IBaseBindingListener {
-  public static void handleEvent(MinecraftClient client, KeyBinding binding) {
+  public void handleBinding(MinecraftClient client, KeyBinding binding) {
 	if (client.player == null) return;
 
 	Config.getOptions().setRenderBossbar(!Config.getOptions().getRenderBossbar());
@@ -22,4 +23,11 @@ public class BossbarToggleListener implements IBaseBindingListener {
 	}
   }
 
+  public void handleMixin(CallbackInfo ci) {
+	if (Config.getOptions().getRenderBossbar()) {
+	  return;
+	}
+
+	ci.cancel();
+  }
 }
