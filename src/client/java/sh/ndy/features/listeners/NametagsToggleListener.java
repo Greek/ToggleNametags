@@ -6,12 +6,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sh.ndy.config.Config;
+import sh.ndy.config.Options;
 
 public class NametagsToggleListener implements IBaseBindingListener {
+  private Options options = Config.getOptions();
+
   public void handleBinding(MinecraftClient client, KeyBinding binding) {
 	if (client.player == null) return;
 
-	Config.getOptions().setRenderNametags(!Config.getOptions().getRenderNametags());
+	options.setRenderNametags(!options.getRenderNametags());
 	Config.saveConfig();
 
 	if (Config.getOptions().getRenderNametags()) {
@@ -24,7 +27,7 @@ public class NametagsToggleListener implements IBaseBindingListener {
   }
 
   public void handleMixin(CallbackInfo ci) {
-	if (Config.getOptions().getRenderNametags()) {
+	if (options.getRenderNametags()) {
 	  return;
 	}
 
