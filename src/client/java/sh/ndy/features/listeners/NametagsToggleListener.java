@@ -2,18 +2,19 @@ package sh.ndy.features.listeners;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sh.ndy.config.Config;
+import sh.ndy.config.Options;
 
-public class NametagsToggleListener<T extends Entity, S extends EntityRenderState> implements IBaseBindingListener {
+public class NametagsToggleListener implements IBaseBindingListener {
+  private Options options = Config.getOptions();
+
   public void handleBinding(MinecraftClient client, KeyBinding binding) {
 	if (client.player == null) return;
 
-	Config.getOptions().setRenderNametags(!Config.getOptions().getRenderNametags());
+	options.setRenderNametags(!options.getRenderNametags());
 	Config.saveConfig();
 
 	if (Config.getOptions().getRenderNametags()) {
@@ -26,7 +27,7 @@ public class NametagsToggleListener<T extends Entity, S extends EntityRenderStat
   }
 
   public void handleMixin(CallbackInfo ci) {
-	if (Config.getOptions().getRenderNametags()) {
+	if (options.getRenderNametags()) {
 	  return;
 	}
 
