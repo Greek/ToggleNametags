@@ -2,14 +2,12 @@ package sh.ndy.features.listeners;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sh.ndy.config.Config;
 
-public class NametagsToggleListener<T extends Entity, S extends EntityRenderState> implements IBaseBindingListener {
+public class NametagsToggleListener implements IBaseBindingListener {
   public void handleBinding(MinecraftClient client, KeyBinding binding) {
 	if (client.player == null) return;
 
