@@ -15,13 +15,15 @@ public class SelfNametagToggleListener<T extends Entity> implements IBaseBinding
 	Config.getOptions().setRenderSelfNametag(!Config.getOptions().getRenderSelfNametag());
 	Config.saveConfig();
 
+	String msg;
 	if (Config.getOptions().getRenderSelfNametag()) {
-	  client.player.sendMessage(Text.literal("Your nametag is visible!").styled(style ->
-			  style.withColor(Formatting.DARK_GRAY)), false);
+	  msg = "Your nametag is visible!";
 	} else {
-	  client.player.sendMessage(Text.literal("Your nametag is hidden!").styled(style ->
-			  style.withColor(Formatting.DARK_GRAY)), false);
+	  msg = "Your nametag is hidden!";
 	}
+
+	client.player.sendMessage(Text.literal(msg).styled(style ->
+			style.withColor(Formatting.DARK_GRAY)), false);
   }
 
   public void handleMixin(T livingEntity, double d, CallbackInfoReturnable<Boolean> cir) {
