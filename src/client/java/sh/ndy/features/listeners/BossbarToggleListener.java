@@ -14,13 +14,15 @@ public class BossbarToggleListener implements IBaseBindingListener {
 	Config.getOptions().setRenderBossbar(!Config.getOptions().getRenderBossbar());
 	Config.saveConfig();
 
+	String msg;
 	if (Config.getOptions().getRenderBossbar()) {
-	  client.player.sendMessage(Text.literal("The bossbar is now shown!").styled(style ->
-			  style.withColor(Formatting.DARK_GRAY)), false);
+	  msg = "The bossbar is visible!";
 	} else {
-	  client.player.sendMessage(Text.literal("The bossbar is now hidden!").styled(style ->
-			  style.withColor(Formatting.DARK_GRAY)), false);
+	  msg = "The bossbar is hidden!";
 	}
+
+	client.player.sendMessage(Text.literal(msg).styled(style ->
+			style.withColor(Formatting.DARK_GRAY)), false);
   }
 
   public void handleMixin(CallbackInfo ci) {
