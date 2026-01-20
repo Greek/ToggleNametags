@@ -1,11 +1,14 @@
 package sh.ndy.screens;
 
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.SimplePositioningWidget;
+import net.minecraft.client.gui.widget.SliderWidget;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import sh.ndy.config.Options;
@@ -44,6 +47,13 @@ public class ConfigScreen extends Screen {
         );
     }
 
+    private Text getNametagOpacityText() {
+        return Text.of(
+                "Nametag Opacity: " +
+                        Config.getOptions().getNametagOpacity() + "%"
+        );
+    }
+
     protected void init() {
         super.init();
 
@@ -76,21 +86,37 @@ public class ConfigScreen extends Screen {
                     btn.setFocused(false);
                     btn.setMessage(getRenderBossbarText());
                 }
-        ).width(332).build();
+        ).width(162).build();
 
         ButtonWidget backToModMenuBtn = ButtonWidget.builder(
                 Text.of("Back to Mod Menu"), (btn) -> this.close()
         ).width(162).build();
 
+        SliderWidget nametagOpacitySlider = new SliderWidget(
+                this.width / 2, 185, 162, 20, getNametagOpacityText(),
+                Config.getOptions().getNametagOpacity()
+        ) {
+            @Override
+            protected void updateMessage() {
+                this.message = getNametagOpacityText();
+            }
+
+            @Override
+            protected void applyValue() {
+                Config.getOptions().setNametagOpacity((float) this.value);
+            }
+        };
+
         adder.add(renderNametagsBtnWidget);
         adder.add(renderSelfNametagsBtnWidget);
-        adder.add(renderBossbarBtnWidget, 2);
+        adder.add(renderBossbarBtnWidget);
+        adder.add(nametagOpacitySlider);
 
         grid.refreshPositions();
 
         SimplePositioningWidget.setPos(grid, 0, 0, this.width, this.height, 0.5F, 0.25F);
         SimplePositioningWidget.setPos(
-                backToModMenuBtn, this.width / 2, 0, 0, this.height - 28);
+                backToModMenuBtn, this.width / 2, 0, 0, this.height + 12);
 
         grid.forEachChild(this::addDrawableChild);
         backToModMenuBtn.forEachChild(this::addDrawableChild);
