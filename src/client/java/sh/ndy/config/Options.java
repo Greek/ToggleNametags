@@ -36,6 +36,5 @@ public class Options {
 
   public void setNametagOpacity(float newOpacity) {
       this.nametagOpacity = Math.floor(newOpacity * 100) / 100;
-      System.out.println(this.nametagOpacity);
   }
 }
