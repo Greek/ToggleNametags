@@ -20,7 +20,9 @@
     "client": [
       "sh.ndy.ToggleNametagsClient"
     ],
-    "modmenu": [ "sh.ndy.config.ToggleNametagsModMenu" ]
+    "modmenu": [
+      "sh.ndy.ToggleNametagsModMenu"
+    ]
   },
   "mixins": [
     "togglenametags.mixins.json",

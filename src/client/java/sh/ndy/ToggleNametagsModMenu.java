@@ -1,4 +1,4 @@
-package sh.ndy.config;
+package sh.ndy;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
