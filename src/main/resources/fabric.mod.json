@@ -5,7 +5,7 @@
   "name": "ToggleNametags",
   "description": "Hide and toggle nametags in-game.",
   "authors": [
-    "andweas <a@ndy.sh>"
+    "Greek"
   ],
   "contact": {
     "sources": "https://github.com/Greek/ToggleNametags"
@@ -36,5 +36,8 @@
     "minecraft": ">=1.21.11- <1.21.12-",
     "java": ">=17",
     "fabric-api": "*"
+  },
+  "suggests": {
+    "mod-menu": "*"
   }
 }
