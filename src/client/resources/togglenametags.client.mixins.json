@@ -6,8 +6,8 @@
     "MixinRenderBossBar",
     "MixinRenderNameTag",
     "MixinRenderSelfNameTag",
-    "MixinLabelCommandRenderer",
-    "MixinLabelCommandRendererCommands"
+    "MixinNametagsTextShadow",
+    "MixinNametagsBackgroundOpacity"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import sh.ndy.features.listeners.NametagsTextShadowListener;
 
 @Mixin(LabelCommandRenderer.class)
-public class MixinLabelCommandRenderer {
+public class MixinNametagsTextShadow {
     private static final NametagsTextShadowListener listener = new NametagsTextShadowListener();
 
     @ModifyArg(method = "render",
