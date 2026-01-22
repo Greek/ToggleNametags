@@ -61,6 +61,13 @@ public class ConfigScreen extends Screen {
         );
     }
 
+    private Text getRenderNametagShadowText() {
+        return Text.of(
+                "Show nametag text shadow: " +
+                        (Config.getOptions().getRenderNametagTextShadow() ? "§aYes" : "§cNo")
+        );
+    }
+
     protected void init() {
         super.init();
 
@@ -95,6 +102,15 @@ public class ConfigScreen extends Screen {
                 }
         ).width(162).build();
 
+        ButtonWidget renderNametagShadowBtnWidget = ButtonWidget.builder(
+                getRenderNametagShadowText(), (btn) -> {
+                    Config.getOptions().setRenderNametagTextShadow(!Config.getOptions().getRenderNametagTextShadow());
+                    Config.saveConfig();
+                    btn.setFocused(false);
+                    btn.setMessage(getRenderNametagShadowText());
+                }
+        ).width(332).build();
+
         ButtonWidget backToModMenuBtn = ButtonWidget.builder(
                 Text.of("Back to Mod Menu"), (btn) -> this.close()
         ).width(162).build();
@@ -119,6 +135,7 @@ public class ConfigScreen extends Screen {
         adder.add(renderSelfNametagsBtnWidget);
         adder.add(renderBossbarBtnWidget);
         adder.add(nametagOpacitySlider);
+        adder.add(renderNametagShadowBtnWidget, 2);
 
         grid.refreshPositions();
 
