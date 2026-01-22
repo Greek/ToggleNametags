@@ -7,6 +7,7 @@ public class Options {
   public boolean renderSelfNametag = false;
   public boolean renderBossbar = true;
   private double nametagOpacity = 1 * Constants.NAMETAG_OPACITY_MULTIPLIER;
+  private boolean renderNametagTextShadow = false;
 
   public boolean getRenderNametags() {
 	return renderNametags;
@@ -39,5 +40,13 @@ public class Options {
   public void setNametagOpacity(float newOpacity) {
     // round to the nearest hundredths
     this.nametagOpacity = (Math.floor(newOpacity * 100.0) / 100.0) * Constants.NAMETAG_OPACITY_MULTIPLIER;
+  }
+
+  public boolean getRenderNametagTextShadow() {
+    return this.renderNametagTextShadow;
+  }
+
+  public void setRenderNametagTextShadow(boolean newSetting) {
+    this.renderNametagTextShadow = newSetting;
   }
 }
