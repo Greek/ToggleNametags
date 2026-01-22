@@ -1,13 +1,17 @@
 package sh.ndy;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import sh.ndy.features.Bindings;
 import sh.ndy.features.listeners.BossbarToggleListener;
 import sh.ndy.features.listeners.NametagsToggleListener;
 import sh.ndy.features.listeners.SelfNametagToggleListener;
 import sh.ndy.config.Config;
+import sh.ndy.screens.ConfigScreen;
 
 public class ToggleNametagsClient implements ClientModInitializer {
   public static boolean isEssentialModLoaded;
@@ -23,6 +27,8 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
+	MinecraftClient c = MinecraftClient.getInstance();
+
 	Config.loadConfig();
 	Bindings.registerAll();
 	checkForEssentialMod();
@@ -53,6 +59,15 @@ public class ToggleNametagsClient implements ClientModInitializer {
 		selfNametagToggleListener.handleBinding(client, renderSelfNametagKeybinding);
 	  }
 
+	});
+
+	// TODO: prettify
+	ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+		dispatcher.register(ClientCommandManager.literal("ntconfig").executes(context -> {
+			c.execute(() -> c.setScreen(new ConfigScreen(null)));
+
+			return 1;
+		}));
 	});
   }
 }
