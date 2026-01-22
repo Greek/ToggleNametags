@@ -138,7 +138,8 @@ public class ConfigScreen extends Screen {
         if (ToggleNametagsClient.isEssentialModLoaded) {
             nametagOpacitySlider.active = false;
             nametagOpacitySlider.setTooltip(
-                    Tooltip.of(Text.of("Please disable Essential in order to change nametag opacity.")));
+                    Tooltip.of(Text.of("Please disable \"Essential\" in your launcher or mod list" +
+                            " in order to change nametag opacity.")));
         }
 
         adder.add(renderNametagsBtnWidget);
