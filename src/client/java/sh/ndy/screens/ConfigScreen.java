@@ -19,6 +19,8 @@ import sh.ndy.config.Config;
 public class ConfigScreen extends Screen {
     private static Screen parent;
     private static MutableText TITLE = Text.translatable("key.category.minecraft.toggle_nametags");
+    private int STANDARD_BTN_WIDTH = 162;
+    private int FULL_BTN_WIDTH = 332;
 
     public ConfigScreen(Screen parent) {
         super(TITLE);
@@ -82,7 +84,7 @@ public class ConfigScreen extends Screen {
                     btn.setFocused(false);
                     btn.setMessage(getRenderNametagsText());
                 }
-        ).width(162).build();
+        ).width(STANDARD_BTN_WIDTH).build();
 
         ButtonWidget renderSelfNametagsBtnWidget = ButtonWidget.builder(
                 getRenderSelfNametagText(), (btn) -> {
@@ -91,16 +93,7 @@ public class ConfigScreen extends Screen {
                     btn.setFocused(false);
                     btn.setMessage(getRenderSelfNametagText());
                 }
-        ).width(162).build();
-
-        ButtonWidget renderBossbarBtnWidget = ButtonWidget.builder(
-                getRenderBossbarText(), (btn) -> {
-                    Config.getOptions().setRenderBossbar(!Config.getOptions().getRenderBossbar());
-                    Config.saveConfig();
-                    btn.setFocused(false);
-                    btn.setMessage(getRenderBossbarText());
-                }
-        ).width(162).build();
+        ).width(STANDARD_BTN_WIDTH).build();
 
         ButtonWidget renderNametagShadowBtnWidget = ButtonWidget.builder(
                 getRenderNametagShadowText(), (btn) -> {
@@ -109,11 +102,21 @@ public class ConfigScreen extends Screen {
                     btn.setFocused(false);
                     btn.setMessage(getRenderNametagShadowText());
                 }
-        ).width(332).build();
+        ).width(STANDARD_BTN_WIDTH).build();
+
+        ButtonWidget renderBossbarBtnWidget = ButtonWidget.builder(
+                getRenderBossbarText(), (btn) -> {
+                    Config.getOptions().setRenderBossbar(!Config.getOptions().getRenderBossbar());
+                    Config.saveConfig();
+                    btn.setFocused(false);
+                    btn.setMessage(getRenderBossbarText());
+                }
+        ).width(FULL_BTN_WIDTH).build();
+
 
         ButtonWidget backToModMenuBtn = ButtonWidget.builder(
                 Text.of("Back to Mod Menu"), (btn) -> this.close()
-        ).width(162).build();
+        ).width(STANDARD_BTN_WIDTH).build();
 
         SliderWidget nametagOpacitySlider = new SliderWidget(
                 this.width / 2, 185, 162, 20, getNametagOpacityText(),
@@ -133,9 +136,9 @@ public class ConfigScreen extends Screen {
 
         adder.add(renderNametagsBtnWidget);
         adder.add(renderSelfNametagsBtnWidget);
-        adder.add(renderBossbarBtnWidget);
+        adder.add(renderNametagShadowBtnWidget);
         adder.add(nametagOpacitySlider);
-        adder.add(renderNametagShadowBtnWidget, 2);
+        adder.add(renderBossbarBtnWidget, 2);
 
         grid.refreshPositions();
 
