@@ -10,10 +10,26 @@ import sh.ndy.features.listeners.SelfNametagToggleListener;
 import sh.ndy.config.Config;
 
 public class ToggleNametagsClient implements ClientModInitializer {
+  public static boolean isEssentialModLoaded;
+
+  private void checkForEssentialMod() {
+	  try {
+          ToggleNametagsClient.class.getClassLoader().loadClass("gg.essential.Essential");
+          this.isEssentialModLoaded = true;
+      } catch (ClassNotFoundException e) {
+          this.isEssentialModLoaded = false;
+      }
+  }
+
   @Override
   public void onInitializeClient() {
 	Config.loadConfig();
 	Bindings.registerAll();
+	checkForEssentialMod();
+
+	if (this.isEssentialModLoaded) {
+		Config.getOptions().setNametagOpacity(1);
+	}
 
 	KeyBinding renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
 	NametagsToggleListener nametagsToggleListener = new NametagsToggleListener();

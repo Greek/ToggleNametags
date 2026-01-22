@@ -1,18 +1,17 @@
 package sh.ndy.screens;
 
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.SimplePositioningWidget;
 import net.minecraft.client.gui.widget.SliderWidget;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import sh.ndy.Constants;
-import sh.ndy.config.Options;
+import sh.ndy.ToggleNametagsClient;
 import sh.ndy.config.Config;
 
 
@@ -133,6 +132,14 @@ public class ConfigScreen extends Screen {
                 Config.saveConfig();
             }
         };
+
+        // TODO: Find a way to remove Essential's padding around the nametags, so we don't have to disable
+        //       this option when Essential is loaded.
+        if (ToggleNametagsClient.isEssentialModLoaded) {
+            nametagOpacitySlider.active = false;
+            nametagOpacitySlider.setTooltip(
+                    Tooltip.of(Text.of("Please disable Essential in order to change nametag opacity.")));
+        }
 
         adder.add(renderNametagsBtnWidget);
         adder.add(renderSelfNametagsBtnWidget);
