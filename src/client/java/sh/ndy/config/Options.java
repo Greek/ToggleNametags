@@ -1,10 +1,12 @@
 package sh.ndy.config;
 
+import sh.ndy.Constants;
+
 public class Options {
   public boolean renderNametags = true;
   public boolean renderSelfNametag = false;
   public boolean renderBossbar = true;
-  private double nametagOpacity = 0.25F;
+  private double nametagOpacity = 1 * Constants.NAMETAG_OPACITY_MULTIPLIER;
 
   public boolean getRenderNametags() {
 	return renderNametags;
@@ -31,10 +33,11 @@ public class Options {
   }
 
   public double getNametagOpacity() {
-      return nametagOpacity;
+      return this.nametagOpacity;
   }
 
   public void setNametagOpacity(float newOpacity) {
-      this.nametagOpacity = Math.floor(newOpacity * 100) / 100;
+    // round to the nearest hundredths
+    this.nametagOpacity = (Math.floor(newOpacity * 100.0) / 100.0) * Constants.NAMETAG_OPACITY_MULTIPLIER;
   }
 }

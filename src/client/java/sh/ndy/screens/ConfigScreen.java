@@ -11,6 +11,7 @@ import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import sh.ndy.Constants;
 import sh.ndy.config.Options;
 import sh.ndy.config.Config;
 
@@ -18,7 +19,6 @@ import sh.ndy.config.Config;
 public class ConfigScreen extends Screen {
     private static Screen parent;
     private static MutableText TITLE = Text.translatable("key.category.minecraft.toggle_nametags");
-    private static Options options = Config.getOptions();
 
     public ConfigScreen(Screen parent) {
         super(TITLE);
@@ -47,10 +47,17 @@ public class ConfigScreen extends Screen {
         );
     }
 
+    private double calcNametagOpacityDisplayVal() {
+        return Config.getOptions().getNametagOpacity() / Constants.NAMETAG_OPACITY_MULTIPLIER;
+    }
+
     private Text getNametagOpacityText() {
         return Text.of(
                 "Nametag Opacity: " +
-                        Config.getOptions().getNametagOpacity() + "%"
+                        String.format(
+                                "%.2f",
+                                calcNametagOpacityDisplayVal()
+                        ) + "%"
         );
     }
 
@@ -94,7 +101,7 @@ public class ConfigScreen extends Screen {
 
         SliderWidget nametagOpacitySlider = new SliderWidget(
                 this.width / 2, 185, 162, 20, getNametagOpacityText(),
-                Config.getOptions().getNametagOpacity()
+                calcNametagOpacityDisplayVal()
         ) {
             @Override
             protected void updateMessage() {
@@ -104,6 +111,7 @@ public class ConfigScreen extends Screen {
             @Override
             protected void applyValue() {
                 Config.getOptions().setNametagOpacity((float) this.value);
+                Config.saveConfig();
             }
         };
 
