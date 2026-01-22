@@ -6,7 +6,7 @@
     "MixinRenderBossBar",
     "MixinRenderNameTag",
     "MixinRenderSelfNameTag",
-    "MixinLabelCommandRenderer"
+    "MixinLabelCommandRendererCommands"
   ],
   "injectors": {
     "defaultRequire": 1

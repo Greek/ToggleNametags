@@ -8,7 +8,7 @@ import sh.ndy.config.Config;
 
 
 @Mixin(LabelCommandRenderer.Commands.class)
-public class MixinLabelCommandRenderer {
+public class MixinLabelCommandRendererCommands {
     @ModifyExpressionValue(method = "add", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundOpacity(F)F"
@@ -16,4 +16,6 @@ public class MixinLabelCommandRenderer {
     private float submitLabel(float original) {
         return (float) Config.getOptions().getNametagOpacity();
     }
+
+
 }
