@@ -2,13 +2,15 @@
   "schemaVersion": 1,
   "id": "togglenametags",
   "version": "${version}",
-  "name": "ToggleNametags",
-  "description": "Hide and toggle nametags in-game.",
+  "name": "Toggle Nametags",
+  "description": "Toggle, hide, and style nametags in-game.",
   "authors": [
     "Greek"
   ],
   "contact": {
-    "sources": "https://github.com/Greek/ToggleNametags"
+    "homepage": "https://modrinth.com/mod/hidetags",
+    "sources": "https://github.com/Greek/ToggleNametags",
+    "issues": "https://github.com/Greek/ToggleNametags/issues"
   },
   "license": "CC0-1.0",
   "icon": "assets/togglenametags/icon.png",
