@@ -6,8 +6,7 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-!/codeStyles/*
 /modules/
 /runConfigurations/
 /copyright/
-/*
+/*.xml
