@@ -10,31 +10,31 @@ public class Options {
   private boolean renderNametagTextShadow = false;
 
   public boolean getRenderNametags() {
-	return renderNametags;
+    return renderNametags;
   }
 
   public void setRenderNametags(boolean toggle) {
-	this.renderNametags = toggle;
+    this.renderNametags = toggle;
   }
 
   public boolean getRenderSelfNametag() {
-	return renderSelfNametag;
+    return renderSelfNametag;
   }
 
   public void setRenderSelfNametag(boolean toggle) {
-	this.renderSelfNametag = toggle;
+    this.renderSelfNametag = toggle;
   }
 
   public boolean getRenderBossbar() {
-	return renderBossbar;
+    return renderBossbar;
   }
 
   public void setRenderBossbar(boolean toggle) {
-	this.renderBossbar = toggle;
+    this.renderBossbar = toggle;
   }
 
   public double getNametagOpacity() {
-      return this.nametagOpacity;
+    return this.nametagOpacity;
   }
 
   public void setNametagOpacity(float newOpacity) {

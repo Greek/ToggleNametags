@@ -2,6 +2,7 @@
   <code_scheme name="Project" version="173">
     <option name="LINE_SEPARATOR" value="&#10;" />
     <JavaCodeStyleSettings>
+      <option name="ANNOTATION_PARAMETER_WRAP" value="1" />
       <option name="DELETE_UNUSED_MODULE_IMPORTS" value="true" />
     </JavaCodeStyleSettings>
     <codeStyleSettings language="JAVA">

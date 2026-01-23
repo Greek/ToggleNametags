@@ -13,6 +13,6 @@ public class MixinRenderBossBar {
 
   @Inject(at = @At("HEAD"), method = "render", cancellable = true)
   private void render(CallbackInfo ci) {
-	listener.handleMixin(ci);
+    listener.handleMixin(ci);
   }
 }
