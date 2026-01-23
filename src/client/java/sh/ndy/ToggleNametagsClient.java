@@ -1,42 +1,79 @@
 package sh.ndy;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sh.ndy.config.Config;
 import sh.ndy.features.Bindings;
 import sh.ndy.features.listeners.BossbarToggleListener;
 import sh.ndy.features.listeners.NametagsToggleListener;
 import sh.ndy.features.listeners.SelfNametagToggleListener;
-import sh.ndy.config.Config;
+import sh.ndy.screens.ConfigScreen;
 
 public class ToggleNametagsClient implements ClientModInitializer {
+  public static boolean isEssentialModLoaded;
+  public static Logger logger = LoggerFactory.getLogger("ToggleNametags");
+
+  private void checkForEssentialMod() {
+    try {
+      ToggleNametagsClient.class.getClassLoader().loadClass("gg.essential.Essential");
+      this.isEssentialModLoaded = true;
+      this.logger.info("Essential mod found. Disabling some features");
+    } catch (ClassNotFoundException e) {
+      this.isEssentialModLoaded = false;
+    }
+  }
+
   @Override
   public void onInitializeClient() {
-	Config.loadConfig();
-	Bindings.registerAll();
+    MinecraftClient c = MinecraftClient.getInstance();
+    this.logger.info("Initializing Toggle Nametags");
 
-	KeyBinding renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
-	NametagsToggleListener nametagsToggleListener = new NametagsToggleListener();
+    Config.loadConfig();
+    Bindings.registerAll();
+    checkForEssentialMod();
 
-	KeyBinding renderBossBarKeybinding = Bindings.Action.TOGGLE_BOSS_BAR.binding();
-	BossbarToggleListener bossbarToggleListener = new BossbarToggleListener();
+    if (this.isEssentialModLoaded) {
+      this.logger.info("Set nametag opacity to its default because of Essential");
+      Config.getOptions().setNametagOpacity(1);
+    }
 
-	KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
-	SelfNametagToggleListener selfNametagToggleListener = new SelfNametagToggleListener();
+    KeyBinding renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
+    NametagsToggleListener nametagsToggleListener = new NametagsToggleListener();
 
-	ClientTickEvents.END_CLIENT_TICK.register(client -> {
-	  while (renderNametagsKeybinding.wasPressed()) {
-		nametagsToggleListener.handleBinding(client, renderNametagsKeybinding);
-	  }
+    KeyBinding renderBossBarKeybinding = Bindings.Action.TOGGLE_BOSS_BAR.binding();
+    BossbarToggleListener bossbarToggleListener = new BossbarToggleListener();
 
-	  while (renderBossBarKeybinding.wasPressed()) {
-		bossbarToggleListener.handleBinding(client, renderBossBarKeybinding);
-	  }
+    KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
+    SelfNametagToggleListener selfNametagToggleListener = new SelfNametagToggleListener();
 
-	  while (renderSelfNametagKeybinding.wasPressed()) {
-		selfNametagToggleListener.handleBinding(client, renderSelfNametagKeybinding);
-	  }
+    ClientTickEvents.END_CLIENT_TICK.register(client -> {
+      while (renderNametagsKeybinding.wasPressed()) {
+        nametagsToggleListener.handleBinding(client, renderNametagsKeybinding);
+      }
 
-	});
+      while (renderBossBarKeybinding.wasPressed()) {
+        bossbarToggleListener.handleBinding(client, renderBossBarKeybinding);
+      }
+
+      while (renderSelfNametagKeybinding.wasPressed()) {
+        selfNametagToggleListener.handleBinding(client, renderSelfNametagKeybinding);
+      }
+
+    });
+
+    // TODO: prettify
+    ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+      dispatcher.register(ClientCommandManager.literal("ntconfig").executes(context -> {
+        c.execute(() -> c.setScreen(new ConfigScreen(null, null)));
+
+        return 1;
+      }));
+    });
   }
 }

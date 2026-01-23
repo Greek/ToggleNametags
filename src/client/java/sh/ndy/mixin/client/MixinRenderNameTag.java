@@ -18,7 +18,7 @@ public class MixinRenderNameTag<T extends Entity, S extends EntityRenderState> {
 
   @Inject(at = @At("HEAD"), method = "renderLabelIfPresent", cancellable = true)
   private void doNotRender(S state, MatrixStack matrices, OrderedRenderCommandQueue queue,
-						   CameraRenderState cameraRenderState, CallbackInfo ci) {
-	listener.handleMixin(ci);
+                           CameraRenderState cameraRenderState, CallbackInfo ci) {
+    listener.handleMixin(ci);
   }
 }

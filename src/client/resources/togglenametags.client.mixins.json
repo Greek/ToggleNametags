@@ -5,7 +5,9 @@
   "client": [
     "MixinRenderBossBar",
     "MixinRenderNameTag",
-    "MixinRenderSelfNameTag"
+    "MixinRenderSelfNameTag",
+    "MixinNametagsTextShadow",
+    "MixinNametagsBackgroundOpacity"
   ],
   "injectors": {
     "defaultRequire": 1
