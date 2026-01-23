@@ -123,7 +123,7 @@ public class ConfigScreen extends Screen {
     grid.refreshPositions();
 
     SimplePositioningWidget.setPos(grid, 0, 0, this.width, this.height, 0.5F, 0.25F);
-    SimplePositioningWidget.setPos(backBtn, this.width / 2, 0, 0, this.height + 12);
+    SimplePositioningWidget.setPos(backBtn, this.width / 2, 0, 0, this.height + 20);
 
     grid.forEachChild(this::addDrawableChild);
     backBtn.forEachChild(this::addDrawableChild);
