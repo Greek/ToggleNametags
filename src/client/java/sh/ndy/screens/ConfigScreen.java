@@ -18,13 +18,15 @@ import sh.ndy.config.Config;
 public class ConfigScreen extends Screen {
     private static Screen parent;
     private static MutableText TITLE = Text.translatable("key.category.minecraft.toggle_nametags");
+    private static Text backText;
     private int STANDARD_BTN_WIDTH = 162;
     private int FULL_BTN_WIDTH = 332;
 
-    public ConfigScreen(Screen parent) {
+    public ConfigScreen(Screen parent, String backText) {
         super(TITLE);
 
         this.parent = parent;
+        this.backText = backText != null ? Text.of(backText) : Text.of("Back to Game");
     }
 
     private Text getRenderNametagsText() {
@@ -113,8 +115,8 @@ public class ConfigScreen extends Screen {
         ).width(FULL_BTN_WIDTH).build();
 
 
-        ButtonWidget backToModMenuBtn = ButtonWidget.builder(
-                Text.of("Back to Mod Menu"), (btn) -> this.close()
+        ButtonWidget backBtn = ButtonWidget.builder(
+                this.backText, (btn) -> this.close()
         ).width(STANDARD_BTN_WIDTH).build();
 
         SliderWidget nametagOpacitySlider = new SliderWidget(
@@ -151,11 +153,10 @@ public class ConfigScreen extends Screen {
         grid.refreshPositions();
 
         SimplePositioningWidget.setPos(grid, 0, 0, this.width, this.height, 0.5F, 0.25F);
-        SimplePositioningWidget.setPos(
-                backToModMenuBtn, this.width / 2, 0, 0, this.height + 12);
+        SimplePositioningWidget.setPos(backBtn, this.width / 2, 0, 0, this.height + 12);
 
         grid.forEachChild(this::addDrawableChild);
-        backToModMenuBtn.forEachChild(this::addDrawableChild);
+        backBtn.forEachChild(this::addDrawableChild);
     }
 
     @Override

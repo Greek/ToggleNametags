@@ -7,6 +7,6 @@ import sh.ndy.screens.ConfigScreen;
 public class ToggleNametagsModMenu implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return screen -> new ConfigScreen(screen);
+        return screen -> new ConfigScreen(screen, "Back to Mod Menu");
     }
 }
