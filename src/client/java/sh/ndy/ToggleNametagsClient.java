@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sh.ndy.config.Config;
 import sh.ndy.features.Bindings;
 import sh.ndy.features.listeners.BossbarToggleListener;
@@ -15,11 +17,13 @@ import sh.ndy.screens.ConfigScreen;
 
 public class ToggleNametagsClient implements ClientModInitializer {
   public static boolean isEssentialModLoaded;
+  public static Logger logger = LoggerFactory.getLogger("ToggleNametags");
 
   private void checkForEssentialMod() {
     try {
       ToggleNametagsClient.class.getClassLoader().loadClass("gg.essential.Essential");
       this.isEssentialModLoaded = true;
+      this.logger.info("Essential mod found. Disabling some features");
     } catch (ClassNotFoundException e) {
       this.isEssentialModLoaded = false;
     }
@@ -28,12 +32,14 @@ public class ToggleNametagsClient implements ClientModInitializer {
   @Override
   public void onInitializeClient() {
     MinecraftClient c = MinecraftClient.getInstance();
+    this.logger.info("Initializing Toggle Nametags");
 
     Config.loadConfig();
     Bindings.registerAll();
     checkForEssentialMod();
 
     if (this.isEssentialModLoaded) {
+      this.logger.info("Set nametag opacity to its default because of Essential");
       Config.getOptions().setNametagOpacity(1);
     }
 
