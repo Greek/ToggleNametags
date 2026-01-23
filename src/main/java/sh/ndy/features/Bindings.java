@@ -3,16 +3,14 @@ package sh.ndy.features;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class Bindings {
   private static final String CATEGORY_NAME = "toggle_nametags";
 
   public static void registerAll() {
-    //? if =1.21.10 {
-    /* KeyBinding.Category category = new KeyBinding.Category(net.minecraft.util.Identifier.of(CATEGORY_NAME));
-    *///?} else
-    KeyBinding.Category category = new KeyBinding.Category(net.minecraft.util.Identifier.of(CATEGORY_NAME));
+    KeyBinding.Category category = new KeyBinding.Category(Identifier.of(CATEGORY_NAME));
 
     for (Action a : Action.values()) {
       a.binding =

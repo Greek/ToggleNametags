@@ -55,8 +55,6 @@ public class ConfigScreen extends Screen {
   }
 
   protected void init() {
-    super.init();
-
     GridWidget grid = new GridWidget();
     grid.getMainPositioner().margin(4, 4, 4, 2);
     GridWidget.Adder adder = grid.createAdder(2);
@@ -96,7 +94,7 @@ public class ConfigScreen extends Screen {
         new SliderWidget(this.width / 2, 185, 162, 20, getNametagOpacityText(), calcNametagOpacityDisplayVal()) {
           @Override
           protected void updateMessage() {
-            this.message = getNametagOpacityText();
+            this.setMessage(getNametagOpacityText());
           }
 
           @Override
