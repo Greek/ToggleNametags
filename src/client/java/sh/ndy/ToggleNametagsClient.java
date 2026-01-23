@@ -68,7 +68,6 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
         return 1;
       }));
-      Ò
     });
   }
 }
