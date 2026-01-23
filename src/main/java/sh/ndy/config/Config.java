@@ -3,10 +3,11 @@ package sh.ndy.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import sh.ndy.ToggleNametagsClient;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.nio.file.Files;
 
 public class Config {
   public static File file = new File(FabricLoader.getInstance().getConfigDir().toFile(), "togglenametags.json");
@@ -34,7 +35,17 @@ public class Config {
   public static void loadConfig() {
     if (file.exists()) {
       try {
-        setOptions(gson.fromJson(Files.readString(file.toPath()), Options.class));
+        Options options = gson.fromJson(new FileReader(file), Options.class);
+        if (options == null) {
+          ToggleNametagsClient.logger.warn("Failed to load config file due to malformed JSON. Recreating with defaults.");
+
+          options = new Options();
+          setOptions(options);
+          saveConfig();
+          return;
+        }
+
+        setOptions(options);
       } catch (Exception e) {
         throw new RuntimeException(e);
       }

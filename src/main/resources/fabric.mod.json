@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "togglenametags",
+  "id": "${id}",
   "version": "${version}",
-  "name": "Toggle Nametags",
+  "name": "${name}",
   "description": "Toggle, hide, and style nametags in-game.",
   "authors": [
     "Greek"
@@ -16,9 +16,6 @@
   "icon": "assets/togglenametags/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "sh.ndy.ToggleNametags"
-    ],
     "client": [
       "sh.ndy.ToggleNametagsClient"
     ],
@@ -34,10 +31,8 @@
     }
   ],
   "depends": {
-    "fabricloader": ">=0.15.10",
-    "minecraft": ">=1.21.11- <1.21.12-",
-    "java": ">=17",
-    "fabric-api": "*"
+    "fabricloader": ">=0.17",
+    "minecraft": "${minecraft}"
   },
   "suggests": {
     "mod-menu": "*"

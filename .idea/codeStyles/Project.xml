@@ -3,7 +3,6 @@
     <option name="LINE_SEPARATOR" value="&#10;" />
     <JavaCodeStyleSettings>
       <option name="ANNOTATION_PARAMETER_WRAP" value="1" />
-      <option name="DELETE_UNUSED_MODULE_IMPORTS" value="true" />
     </JavaCodeStyleSettings>
     <codeStyleSettings language="JAVA">
       <option name="KEEP_LINE_BREAKS" value="false" />
