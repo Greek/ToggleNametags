@@ -2,7 +2,7 @@ plugins {
     id("net.fabricmc.fabric-loom-remap")
 
     // `maven-publish`
-    // id("me.modmuss50.mod-publish-plugin")
+    id("me.modmuss50.mod-publish-plugin") version("1.1.0")
 }
 
 version = "${property("mod.version")}+${sc.current.version}"
@@ -96,7 +96,7 @@ tasks {
     }
 }
 
-/*
+
 // Publishes builds to Modrinth and Curseforge with changelog from the CHANGELOG.md file
 publishMods {
     file = tasks.remapJar.map { it.archiveFile.get() }
@@ -128,7 +128,7 @@ publishMods {
         }
     }
 }
- */
+
 /*
 // Publishes builds to a maven repository under `com.example:template:0.1.0+mc`
 publishing {
