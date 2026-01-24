@@ -39,7 +39,7 @@ dependencies {
     }
 
     minecraft("com.mojang:minecraft:${sc.current.version}")
-    mappings("net.fabricmc:yarn:1.21.10+build.3:v2")
+    mappings("net.fabricmc:yarn:${property("deps.mappings")}")
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 

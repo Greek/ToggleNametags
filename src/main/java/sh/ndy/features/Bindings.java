@@ -10,6 +10,9 @@ public class Bindings {
   private static final String CATEGORY_NAME = "toggle_nametags";
 
   public static void registerAll() {
+    //? if <=1.21.1 {
+    /* String category = CATEGORY_NAME; */
+    //?} else
     KeyBinding.Category category = new KeyBinding.Category(Identifier.of(CATEGORY_NAME));
 
     for (Action a : Action.values()) {
