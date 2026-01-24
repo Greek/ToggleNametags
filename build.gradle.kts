@@ -41,7 +41,7 @@ dependencies {
     minecraft("com.mojang:minecraft:${sc.current.version}")
     mappings("net.fabricmc:yarn:1.21.10+build.3:v2")
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    modImplementation("com.terraformersmc:modmenu:17.0.0-beta.2")
+    modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
     fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-command-api-v2", "fabric-key-binding-api-v1", "fabric-screen-api-v1")
 }
