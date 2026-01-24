@@ -52,6 +52,15 @@ public class ToggleNametagsClient implements ClientModInitializer {
     KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
     SelfNametagToggleListener selfNametagToggleListener = new SelfNametagToggleListener();
 
+    // TODO: prettify
+    ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+      dispatcher.register(ClientCommandManager.literal("ntconfig").executes(context -> {
+        context.getSource().getClient().send(() -> c.setScreen(new ConfigScreen(null, null)));
+
+        return 1;
+      }));
+    });
+
     ClientTickEvents.END_CLIENT_TICK.register(client -> {
       while (renderNametagsKeybinding.wasPressed()) {
         nametagsToggleListener.handleBinding(client, renderNametagsKeybinding);
@@ -65,15 +74,6 @@ public class ToggleNametagsClient implements ClientModInitializer {
         selfNametagToggleListener.handleBinding(client, renderSelfNametagKeybinding);
       }
 
-    });
-
-    // TODO: prettify
-    ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-      dispatcher.register(ClientCommandManager.literal("ntconfig").executes(context -> {
-        c.execute(() -> c.setScreen(new ConfigScreen(null, null)));
-
-        return 1;
-      }));
     });
   }
 }
