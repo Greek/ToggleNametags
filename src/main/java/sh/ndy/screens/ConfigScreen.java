@@ -16,9 +16,9 @@ import sh.ndy.config.Config;
 
 
 public class ConfigScreen extends Screen {
-  private static Screen parent;
-  private static MutableText TITLE = Text.translatable("key.category.minecraft.toggle_nametags");
-  private static Text backText;
+  private static final MutableText TITLE = Text.translatable("key.category.minecraft.toggle_nametags");
+  private final Screen parent;
+  private final Text backText;
   private int STANDARD_BTN_WIDTH = 162;
   private int FULL_BTN_WIDTH = 332;
 

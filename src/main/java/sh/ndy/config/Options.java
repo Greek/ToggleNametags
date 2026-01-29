@@ -2,6 +2,7 @@ package sh.ndy.config;
 
 import sh.ndy.Constants;
 
+// TODO: Use lombok
 public class Options {
   public boolean renderNametags = true;
   public boolean renderSelfNametag = false;

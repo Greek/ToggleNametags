@@ -23,10 +23,10 @@ public class ToggleNametagsClient implements ClientModInitializer {
   private void checkForEssentialMod() {
     try {
       ToggleNametagsClient.class.getClassLoader().loadClass("gg.essential.Essential");
-      this.isEssentialModLoaded = true;
-      this.logger.info("Essential mod found. Disabling some features");
+      ToggleNametagsClient.isEssentialModLoaded = true;
+      ToggleNametagsClient.logger.info("Essential mod found. Disabling some features");
     } catch (ClassNotFoundException e) {
-      this.isEssentialModLoaded = false;
+      ToggleNametagsClient.isEssentialModLoaded = false;
     }
   }
 
@@ -39,8 +39,8 @@ public class ToggleNametagsClient implements ClientModInitializer {
     Bindings.registerAll();
     checkForEssentialMod();
 
-    if (this.isEssentialModLoaded) {
-      this.logger.info("Set nametag opacity to its default because of Essential");
+    if (ToggleNametagsClient.isEssentialModLoaded) {
+      ToggleNametagsClient.logger.info("Set nametag opacity to its default because of Essential");
       Config.getOptions().setNametagOpacity(1);
     }
 

@@ -14,6 +14,7 @@ import net.minecraft.client.render.state.CameraRenderState;
 //?}
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -27,6 +28,7 @@ public class MixinRenderNameTag
     <T extends Entity, S extends EntityRenderState>
     //?}
 {
+  @Unique
   private static final NametagsToggleListener listener = new NametagsToggleListener();
 
   @Inject(at = @At("HEAD"), method = "renderLabelIfPresent", cancellable = true)
