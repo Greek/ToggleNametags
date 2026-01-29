@@ -3,7 +3,7 @@ package sh.ndy.features.listeners;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 
-interface IBaseBindingListener<T> {
+interface IBaseBindingListener {
   static void handleBinding(MinecraftClient client, KeyBinding binding) {
 
   }
