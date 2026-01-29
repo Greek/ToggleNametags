@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.entity.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sh.ndy.config.Config;
@@ -50,7 +51,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
     BossbarToggleListener bossbarToggleListener = new BossbarToggleListener();
 
     KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
-    SelfNametagToggleListener selfNametagToggleListener = new SelfNametagToggleListener();
+    SelfNametagToggleListener<Entity> selfNametagToggleListener = new SelfNametagToggleListener<>();
 
     // TODO: prettify
     ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
