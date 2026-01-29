@@ -12,7 +12,8 @@ public class NametagsToggleListener implements IBaseBindingListener {
     boolean isSelfNametagShown = Config.getOptions().getRenderSelfNametag();
     if (client.player == null) return;
 
-    Config.getOptions().setRenderNametags(!Config.getOptions().getRenderNametags());
+    var currSetting = Config.getOptions().getRenderNametags();
+    Config.getOptions().setRenderNametags(!currSetting);
     Config.saveConfig();
 
     String msg;

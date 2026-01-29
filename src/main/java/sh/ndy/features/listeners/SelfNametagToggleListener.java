@@ -12,7 +12,8 @@ public class SelfNametagToggleListener<T extends Entity> implements IBaseBinding
   public void handleBinding(MinecraftClient client, KeyBinding binding) {
     if (client.player == null) return;
 
-    Config.getOptions().setRenderSelfNametag(!Config.getOptions().getRenderSelfNametag());
+    var currSetting = Config.getOptions().getRenderSelfNametag();
+    Config.getOptions().setRenderSelfNametag(!currSetting);
     Config.saveConfig();
 
     String msg;
