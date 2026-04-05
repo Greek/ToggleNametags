@@ -1,4 +1,3 @@
-// TODO(Ravel): Failed to fully resolve file: class com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl cannot be cast to class com.intellij.psi.PsiLiteralExpression (com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl and com.intellij.psi.PsiLiteralExpression are in unnamed module of loader com.intellij.ide.plugins.cl.PluginClassLoader @173c341f)
 package sh.ndy.mixin.client;
 
 import net.minecraft.client.renderer.feature.NameTagFeatureRenderer;
