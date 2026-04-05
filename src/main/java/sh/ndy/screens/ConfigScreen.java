@@ -1,6 +1,7 @@
 package sh.ndy.screens;
 
 
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.Button;
@@ -126,7 +127,11 @@ public class ConfigScreen extends Screen {
     backBtn.visitWidgets(this::addRenderableWidget);
   }
 
-  
+  @Override
+  public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+    super.extractRenderState(graphics, mouseX, mouseY, a);
+    graphics.centeredText(this.font, this.title, this.width / 2, 8, 0xFFFFFFFF);
+  }
 
   @Override
   public void onClose() {
