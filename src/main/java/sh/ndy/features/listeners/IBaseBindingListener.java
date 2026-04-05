@@ -1,10 +1,10 @@
 package sh.ndy.features.listeners;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.KeyMapping;
 
-interface IBaseBindingListener {
-  static void handleBinding(MinecraftClient client, KeyBinding binding) {
+interface IBaseBindingListener<T> {
+  static void handleBinding(Minecraft client, KeyMapping binding) {
 
   }
 
