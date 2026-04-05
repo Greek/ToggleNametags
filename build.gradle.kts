@@ -39,7 +39,11 @@ dependencies {
     }
 
     minecraft("com.mojang:minecraft:${sc.current.version}")
-    mappings("net.fabricmc:yarn:${property("deps.mappings")}")
+    if (sc.current.parsed < "1.12.11") {
+        mappings("net.fabricmc:yarn:${property("deps.mappings")}")
+    } else if (sc.current.parsed >= "1.12.11") {
+        mappings(loom.officialMojangMappings())
+    }
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 

@@ -4,8 +4,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.KeyMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sh.ndy.config.Config;
@@ -31,7 +31,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
-    MinecraftClient c = MinecraftClient.getInstance();
+    Minecraft c = Minecraft.getInstance();
     this.logger.info("Initializing Toggle Nametags");
 
     Config.loadConfig();
@@ -43,34 +43,34 @@ public class ToggleNametagsClient implements ClientModInitializer {
       Config.getOptions().setNametagOpacity(1);
     }
 
-    KeyBinding renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
+    KeyMapping renderNametagsKeybinding = Bindings.Action.TOGGLE_NAMETAGS.binding();
     NametagsToggleListener nametagsToggleListener = new NametagsToggleListener();
 
-    KeyBinding renderBossBarKeybinding = Bindings.Action.TOGGLE_BOSS_BAR.binding();
+    KeyMapping renderBossBarKeybinding = Bindings.Action.TOGGLE_BOSS_BAR.binding();
     BossbarToggleListener bossbarToggleListener = new BossbarToggleListener();
 
-    KeyBinding renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
+    KeyMapping renderSelfNametagKeybinding = Bindings.Action.SHOW_SELF_NAMETAG.binding();
     SelfNametagToggleListener selfNametagToggleListener = new SelfNametagToggleListener();
 
     // TODO: prettify
     ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
       dispatcher.register(ClientCommandManager.literal("ntconfig").executes(context -> {
-        context.getSource().getClient().send(() -> c.setScreen(new ConfigScreen(null, null)));
+        context.getSource().getClient().schedule(() -> c.setScreen(new ConfigScreen(null, null)));
 
         return 1;
       }));
     });
 
     ClientTickEvents.END_CLIENT_TICK.register(client -> {
-      while (renderNametagsKeybinding.wasPressed()) {
+      while (renderNametagsKeybinding.consumeClick()) {
         nametagsToggleListener.handleBinding(client, renderNametagsKeybinding);
       }
 
-      while (renderBossBarKeybinding.wasPressed()) {
+      while (renderBossBarKeybinding.consumeClick()) {
         bossbarToggleListener.handleBinding(client, renderBossBarKeybinding);
       }
 
-      while (renderSelfNametagKeybinding.wasPressed()) {
+      while (renderSelfNametagKeybinding.consumeClick()) {
         selfNametagToggleListener.handleBinding(client, renderSelfNametagKeybinding);
       }
 

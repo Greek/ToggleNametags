@@ -1,15 +1,15 @@
 package sh.ndy.features.listeners;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.entity.Entity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sh.ndy.config.Config;
 
 public class SelfNametagToggleListener<T extends Entity> implements IBaseBindingListener {
-  public void handleBinding(MinecraftClient client, KeyBinding binding) {
+  public void handleBinding(Minecraft client, KeyMapping binding) {
     if (client.player == null) return;
 
     Config.getOptions().setRenderSelfNametag(!Config.getOptions().getRenderSelfNametag());
@@ -22,11 +22,11 @@ public class SelfNametagToggleListener<T extends Entity> implements IBaseBinding
       msg = "Your nametag is hidden!";
     }
 
-    client.player.sendMessage(Text.literal(msg).styled(style -> style.withColor(Formatting.DARK_GRAY)), false);
+    client.player.displayClientMessage(Component.literal(msg).withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)), false);
   }
 
   public void handleMixin(T livingEntity, double d, CallbackInfoReturnable<Boolean> cir) {
-    if (Config.getOptions().getRenderSelfNametag() && livingEntity == MinecraftClient.getInstance().getCameraEntity()) {
+    if (Config.getOptions().getRenderSelfNametag() && livingEntity == Minecraft.getInstance().getCameraEntity()) {
       cir.setReturnValue(true);
     }
   }

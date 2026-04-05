@@ -1,23 +1,26 @@
 package sh.ndy.features;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.KeyMapping;
+import com.mojang.blaze3d.platform.InputConstants;
+//? if <=1.21.10 {
+/* import net.minecraft.resources.ResourceLocation; */
+//?} else
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class Bindings {
   private static final String CATEGORY_NAME = "toggle_nametags";
 
   public static void registerAll() {
-    //? if <=1.21.1 {
-    /* String category = CATEGORY_NAME; */
+    //? if <=1.21.10 {
+    /* KeyMapping.Category category = new KeyMapping.Category(ResourceLocation.parse(CATEGORY_NAME)); */
     //?} else
-    KeyBinding.Category category = new KeyBinding.Category(Identifier.of(CATEGORY_NAME));
+    KeyMapping.Category category = new KeyMapping.Category(Identifier.parse(CATEGORY_NAME));
 
     for (Action a : Action.values()) {
       a.binding =
-          KeyBindingHelper.registerKeyBinding(new KeyBinding(a.label, InputUtil.Type.KEYSYM, a.defaultKey, category));
+          KeyBindingHelper.registerKeyBinding(new KeyMapping(a.label, InputConstants.Type.KEYSYM, a.defaultKey, category));
     }
   }
 
@@ -26,14 +29,14 @@ public class Bindings {
 
     private final String label;
     private final int defaultKey;
-    private KeyBinding binding;
+    private KeyMapping binding;
 
     Action(String label, int defaultKey) {
       this.label = label;
       this.defaultKey = defaultKey;
     }
 
-    public KeyBinding binding() {
+    public KeyMapping binding() {
       return binding;
     }
   }
