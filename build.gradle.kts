@@ -1,6 +1,5 @@
 plugins {
-    id("net.fabricmc.fabric-loom-remap")
-
+    id("net.fabricmc.fabric-loom") version ("1.15-SNAPSHOT")
     // `maven-publish`
     id("me.modmuss50.mod-publish-plugin") version("1.1.0")
 }
@@ -9,6 +8,7 @@ version = "${property("mod.version")}+${sc.current.version}"
 base.archivesName = property("mod.id") as String
 
 val requiredJava = when {
+    sc.current.parsed >= "26.1" -> JavaVersion.VERSION_25
     sc.current.parsed >= "1.20.6" -> JavaVersion.VERSION_21
     sc.current.parsed >= "1.18" -> JavaVersion.VERSION_17
     sc.current.parsed >= "1.17" -> JavaVersion.VERSION_16
@@ -35,24 +35,26 @@ dependencies {
      * @see <a href="https://github.com/FabricMC/fabric">List of Fabric API modules</a>
      */
     fun fapi(vararg modules: String) {
-        for (it in modules) modImplementation(fabricApi.module(it, property("deps.fabric_api") as String))
+        for (it in modules) implementation(fabricApi.module(it, property("deps.fabric_api") as String))
     }
 
     minecraft("com.mojang:minecraft:${sc.current.version}")
-    if (sc.current.parsed < "1.12.11") {
-        mappings("net.fabricmc:yarn:${property("deps.mappings")}")
-    } else if (sc.current.parsed >= "1.12.11") {
-        mappings(loom.officialMojangMappings())
-    }
-    modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    implementation ("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+    implementation ("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-command-api-v2", "fabric-key-binding-api-v1", "fabric-screen-api-v1")
+    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-command-api-v2", "fabric-key-mapping-api-v1", "fabric-screen-api-v1")
 }
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
-    accessWidenerPath = rootProject.file("src/main/resources/togglenametags.accesswidener")
+    if (sc.current.parsed >= "26.1") {
+        accessWidenerPath = rootProject.file("src/main/resources/togglenametags.accesswidener")
+    }
+
+    // named access widener vs official
+    if (sc.current.parsed < "26.1") {
+        accessWidenerPath = rootProject.file("src/main/resources/togglenametags_legacy.accesswidener")
+    }
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
@@ -94,7 +96,7 @@ tasks {
     // Builds the version into a shared folder in `build/libs/${mod version}/`
     register<Copy>("buildAndCollect") {
         group = "build"
-        from(remapJar.map { it.archiveFile }, remapSourcesJar.map { it.archiveFile })
+        from(jar.map { it.archiveFile }, jar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
     }
@@ -103,7 +105,7 @@ tasks {
 
 // Publishes builds to Modrinth and Curseforge with changelog from the CHANGELOG.md file
 publishMods {
-    file = tasks.remapJar.map { it.archiveFile.get() }
+    file = tasks.jar.map { it.archiveFile.get() }
     // additionalFiles.from(tasks.remapSourcesJar.map { it.archiveFile.get() })
     displayName = "[${property("mod.mc_title")}] ${property("mod.name")} ${property("mod.version")}"
     version = "${property("mod.version")}+${property("mod.mc_title")}"

@@ -10,10 +10,10 @@ import sh.ndy.features.listeners.NametagsTextShadowListener;
 @Mixin(NameTagFeatureRenderer.class)
 public class MixinNametagsTextShadow {
   private final String TEXT_RENDERER_TARGET =
-      "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V";
+    "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4fc;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V";
   private static final NametagsTextShadowListener listener = new NametagsTextShadowListener();
 
-  @ModifyArg(method = "render", at = @At(value = "INVOKE", target = TEXT_RENDERER_TARGET))
+  @ModifyArg(method = "renderTranslucent", at = @At(value = "INVOKE", target = TEXT_RENDERER_TARGET))
   private boolean render(boolean original) {
     return listener.handleMixin();
   }

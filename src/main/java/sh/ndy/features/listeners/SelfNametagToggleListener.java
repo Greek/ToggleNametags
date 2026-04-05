@@ -22,7 +22,7 @@ public class SelfNametagToggleListener<T extends Entity> implements IBaseBinding
       msg = "Your nametag is hidden!";
     }
 
-    client.player.displayClientMessage(Component.literal(msg).withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)), false);
+    client.player.sendSystemMessage(Component.literal(msg).withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)));
   }
 
   public void handleMixin(T livingEntity, double d, CallbackInfoReturnable<Boolean> cir) {

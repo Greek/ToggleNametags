@@ -1,7 +1,6 @@
 package sh.ndy.screens;
 
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.Button;
@@ -127,11 +126,7 @@ public class ConfigScreen extends Screen {
     backBtn.visitWidgets(this::addRenderableWidget);
   }
 
-  @Override
-  public void render(GuiGraphics context, int mouseX, int mouseY, float deltaTicks) {
-    super.render(context, mouseX, mouseY, deltaTicks);
-    context.drawCenteredString(this.font, this.title, this.width / 2, 8, 0xFFFFFFFF);
-  }
+  
 
   @Override
   public void onClose() {

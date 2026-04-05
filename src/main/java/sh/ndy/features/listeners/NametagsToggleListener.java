@@ -25,7 +25,7 @@ public class NametagsToggleListener implements IBaseBindingListener {
       }
     }
 
-    client.player.displayClientMessage(Component.literal(msg).withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)), false);
+    client.player.sendSystemMessage(Component.literal(msg).withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)));
   }
 
   public void handleMixin(CallbackInfo ci) {

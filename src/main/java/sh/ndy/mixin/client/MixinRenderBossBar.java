@@ -11,7 +11,7 @@ import sh.ndy.features.listeners.BossbarToggleListener;
 public class MixinRenderBossBar {
   private static final BossbarToggleListener listener = new BossbarToggleListener();
 
-  @Inject(at = @At("HEAD"), method = "render", cancellable = true)
+  @Inject(at = @At("HEAD"), method = "extractRenderState", cancellable = true)
   private void render(CallbackInfo ci) {
     listener.handleMixin(ci);
   }

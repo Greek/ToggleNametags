@@ -1,7 +1,7 @@
 package sh.ndy;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
@@ -54,7 +54,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
 
     // TODO: prettify
     ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-      dispatcher.register(ClientCommandManager.literal("ntconfig").executes(context -> {
+      dispatcher.register(ClientCommands.literal("ntconfig").executes(context -> {
         context.getSource().getClient().schedule(() -> c.setScreen(new ConfigScreen(null, null)));
 
         return 1;

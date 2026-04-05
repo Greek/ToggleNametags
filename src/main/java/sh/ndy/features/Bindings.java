@@ -1,6 +1,6 @@
 package sh.ndy.features;
 
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
 //? if <=1.21.10 {
@@ -20,7 +20,7 @@ public class Bindings {
 
     for (Action a : Action.values()) {
       a.binding =
-          KeyBindingHelper.registerKeyBinding(new KeyMapping(a.label, InputConstants.Type.KEYSYM, a.defaultKey, category));
+          KeyMappingHelper.registerKeyMapping(new KeyMapping(a.label, InputConstants.Type.KEYSYM, a.defaultKey, category));
     }
   }
 

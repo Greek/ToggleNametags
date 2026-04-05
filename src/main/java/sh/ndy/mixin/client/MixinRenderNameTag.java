@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
 //?}
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,7 +29,7 @@ public class MixinRenderNameTag
 {
   private static final NametagsToggleListener listener = new NametagsToggleListener();
 
-  @Inject(at = @At("HEAD"), method = "submitNameTag", cancellable = true)
+  @Inject(at = @At("HEAD"), method = "submitNameDisplay", cancellable = true)
   //? if <=1.21.1 {
   /* private void doNotRender(Entity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers,
                             int light, float tickDelta, CallbackInfo ci) { *///?} else

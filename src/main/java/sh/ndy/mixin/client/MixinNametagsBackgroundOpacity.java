@@ -10,7 +10,7 @@ import sh.ndy.config.Config;
 @Mixin(NameTagFeatureRenderer.Storage.class)
 public class MixinNametagsBackgroundOpacity {
   @ModifyExpressionValue(method = "add",
-      at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Options;getBackgroundOpacity(F)F"))
+      at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/state/OptionsRenderState;getBackgroundOpacity(F)F"))
   private float submitLabel(float original) {
     return (float) Config.getOptions().getNametagOpacity();
   }
