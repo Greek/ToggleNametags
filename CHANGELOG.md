@@ -1,4 +1,3 @@
-- Added mutli-version support for: 
-  - 1.21.11
-  - 1.21.10
-- QoL improvements/bug fixes on 1.21.10.
+## Changelog 
+- Use Mojang's official mappings instead of Yarn.
+- Nothing else special... :(
