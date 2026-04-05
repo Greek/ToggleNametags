@@ -4,7 +4,7 @@ plugins {
     // id("me.modmuss50.mod-publish-plugin") version "1.0.+" apply false
 }
 
-stonecutter active "26.1"
+stonecutter active "26.1.1"
 
 // Make newer versions be published last
 stonecutter tasks {
@@ -20,8 +20,6 @@ stonecutter parameters {
     dependencies["fapi"] = node.project.property("deps.fabric_api") as String
 
     replacements {
-//        string(current.parsed >= "1.21.10") {
-//            replace("ResourceLocation", "Identifier")
-//        }
+
     }
 }
