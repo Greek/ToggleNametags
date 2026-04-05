@@ -1,4 +1,4 @@
-- Added mutli-version support for: 
-  - 1.21.11
-  - 1.21.10
-- QoL improvements/bug fixes on 1.21.10.
+- Added support for:
+  - 26.1
+  - 26.1.1
+- Dropped support for 1.21.x :(
