@@ -1,4 +1,3 @@
-- Added support for:
-  - 26.1
-  - 26.1.1
-- Dropped support for 1.21.x :(
+# Toggle Nametags Changelog
+
+- Added support for 26.1.2.
