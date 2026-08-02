@@ -3,11 +3,11 @@
   "package": "sh.ndy.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "MixinNametagsBackgroundOpacity",
+    "MixinNametagsTextShadow",
     "MixinRenderBossBar",
     "MixinRenderNameTag",
-    "MixinRenderSelfNameTag",
-    "MixinNametagsTextShadow",
-    "MixinNametagsBackgroundOpacity"
+    "MixinRenderSelfNameTag"
   ],
   "injectors": {
     "defaultRequire": 1
