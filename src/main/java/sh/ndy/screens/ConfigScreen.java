@@ -54,6 +54,10 @@ public class ConfigScreen extends Screen {
         "Show nametag text shadow: " + (Config.getOptions().getRenderNametagTextShadow() ? "§aYes" : "§cNo"));
   }
 
+  private Component getEnableNametagBackground() {
+    return Component.nullToEmpty("Show nametag background: " + (Config.getOptions().getNametagBackgroundEnabled() ? "§aYes" : "§cNo"));
+  }
+
   protected void init() {
     GridLayout grid = new GridLayout();
     grid.defaultCellSetting().padding(4, 4, 4, 2);
@@ -104,6 +108,13 @@ public class ConfigScreen extends Screen {
           }
         };
 
+    Button renderNametagBackground = Button.builder(getEnableNametagBackground(), (btn) -> {
+      Config.getOptions().setNametagBackgroundEnabled(!Config.getOptions().getNametagBackgroundEnabled());
+      Config.saveConfig();
+      btn.setFocused(false);
+      btn.setMessage(getEnableNametagBackground());
+    }).width(STANDARD_BTN_WIDTH).build();
+
     // TODO: Find a way to remove Essential's padding around the nametags, so we don't have to disable
     //       this option when Essential is loaded.
     if (ToggleNametagsClient.isEssentialModLoaded) {
@@ -115,7 +126,12 @@ public class ConfigScreen extends Screen {
     adder.addChild(renderNametagsBtnWidget);
     adder.addChild(renderSelfNametagsBtnWidget);
     adder.addChild(renderNametagShadowBtnWidget);
-    adder.addChild(nametagOpacitySlider);
+
+    //? if < 26.2 {
+    /* adder.addChild(nametagOpacitySlider); */
+    //?} else {
+    adder.addChild(renderNametagBackground);
+
     adder.addChild(renderBossbarBtnWidget, 2);
 
     grid.arrangeElements();
@@ -135,6 +151,9 @@ public class ConfigScreen extends Screen {
 
   @Override
   public void onClose() {
-    this.minecraft.setScreen(parent);
+    //? if < 26.2 {
+    // this.minecraft.setScreen(parent);
+    //?} else
+    this.minecraft.setScreenAndShow(parent);
   }
 }

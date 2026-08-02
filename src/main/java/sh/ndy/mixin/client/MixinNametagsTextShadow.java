@@ -9,13 +9,22 @@ import sh.ndy.features.listeners.NametagsTextShadowListener;
 
 @Mixin(NameTagFeatureRenderer.class)
 public class MixinNametagsTextShadow {
-  @Unique
-  private final String TEXT_RENDERER_TARGET =
+  //? if < 26.2 {
+  /* @Unique private static final String TEXT_RENDERER_TARGET =
     "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4fc;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V";
+  *///?} else
+  @Unique private static final String TEXT_RENDERER_TARGET =
+      "Lnet/minecraft/client/gui/Font;prepareText(Lnet/minecraft/util/FormattedCharSequence;FFIZZI)Lnet/minecraft/client/gui/Font$PreparedText;";
+
   private static final NametagsTextShadowListener listener = new NametagsTextShadowListener();
 
-  @ModifyArg(method = "renderTranslucent", at = @At(value = "INVOKE", target = TEXT_RENDERER_TARGET))
-  private boolean render(boolean original) {
+  @ModifyArg(method = "prepareText",
+      at = @At(value = "INVOKE", target = TEXT_RENDERER_TARGET),
+      //? if >=26.2 {
+      index = 4
+      //?}
+  )
+  private static boolean render(boolean drawShadow) {
     return listener.handleMixin();
   }
 }
