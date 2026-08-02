@@ -129,7 +129,7 @@ public class ConfigScreen extends Screen {
 
     //? if < 26.2 {
     /* adder.addChild(nametagOpacitySlider); */
-    //?} else {
+    //?} else
     adder.addChild(renderNametagBackground);
 
     adder.addChild(renderBossbarBtnWidget, 2);
