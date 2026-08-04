@@ -12,14 +12,15 @@ import sh.ndy.config.Config;
 
 //? if < 26.2 {
 /* @Mixin(NameTagFeatureRenderer.Storage.class) */
-//?} else {
+//?}
+
+//? if >= 26.2 {
 @Mixin(NameTagFeatureRenderer.class)
 //?}
 public class MixinNametagsBackgroundOpacity {
   //? if < 26.2 {
   /* @Unique private static final String TARGET = "Lnet/minecraft/client/renderer/state/OptionsRenderState;getBackgroundOpacity(F)F"; */
-  //?} else
-  @Unique private static final String TARGET = "Lnet/minecraft/client/gui/Font;prepareText(Lnet/minecraft/util/FormattedCharSequence;FFIZZI)Lnet/minecraft/client/gui/Font$PreparedText;";
+  //?}
 
   //? if < 26.2 {
   /* @ModifyExpressionValue(
@@ -32,7 +33,11 @@ public class MixinNametagsBackgroundOpacity {
    private float changeOpacity(float original) {
     return (float) Config.getOptions().getNametagOpacity();
   }
-  *///?} else {
+  *///?}
+
+  //? if >= 26.2 {
+  @Unique private static final String TARGET = "Lnet/minecraft/client/gui/Font;prepareText(Lnet/minecraft/util/FormattedCharSequence;FFIZZI)Lnet/minecraft/client/gui/Font$PreparedText;";
+
   @ModifyArg(
       method = "prepareText",
       at = @At(
