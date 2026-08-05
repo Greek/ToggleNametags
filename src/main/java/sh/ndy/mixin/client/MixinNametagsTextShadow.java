@@ -12,9 +12,14 @@ public class MixinNametagsTextShadow {
   private static final NametagsTextShadowListener listener = new NametagsTextShadowListener();
 
   //? if < 26.2 {
+  /* @Unique private static final String TARGET =
+      "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4fc;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V"; */
+  //} else
+  @Unique private static final String TARGET =
+      "Lnet/minecraft/client/gui/Font;prepareText(Lnet/minecraft/util/FormattedCharSequence;FFIZZI)Lnet/minecraft/client/gui/Font$PreparedText;";
+
+  //? if < 26.2 {
   /*
-    @Unique private static final String TARGET =
-      "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4fc;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V";
 
     @ModifyArg(method = "renderTranslucent", at = @At(value = "INVOKE", target = TARGET))
     private boolean render(boolean original) {
@@ -23,9 +28,6 @@ public class MixinNametagsTextShadow {
   *///?}
 
   //? if >= 26.2 {
-  @Unique private static final String TARGET =
-      "Lnet/minecraft/client/gui/Font;prepareText(Lnet/minecraft/util/FormattedCharSequence;FFIZZI)Lnet/minecraft/client/gui/Font$PreparedText;";
-
   @ModifyArg(method = "prepareText",
       at = @At(value = "INVOKE", target = TARGET),
       index = 4
