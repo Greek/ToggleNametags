@@ -154,6 +154,6 @@ public class ConfigScreen extends Screen {
     //? if < 26.2 {
     // this.minecraft.setScreen(parent);
     //?} else
-    this.minecraft.setScreenAndShow(parent);
+    this.minecraft.gui.setScreen(parent);
   }
 }
