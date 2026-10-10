@@ -1,13 +1,13 @@
 package sh.ndy.mixin.client;
 
-import net.minecraft.client.renderer.feature.NameTagFeatureRenderer;
+import net.minecraft.client.renderer.feature.TextFeatureRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import sh.ndy.features.listeners.NametagsTextShadowListener;
 
-@Mixin(NameTagFeatureRenderer.class)
+@Mixin(TextFeatureRenderer.class)
 public class MixinNametagsTextShadow {
   //? if < 26.2 {
   /* @Unique private static final String TARGET =
@@ -27,7 +27,7 @@ public class MixinNametagsTextShadow {
   }
   */
   //?} else {
-  @ModifyArg(method = "prepareText",
+  @ModifyArg(method = "renderText",
       at = @At(value = "INVOKE", target = TARGET),
       index = 4
   )
