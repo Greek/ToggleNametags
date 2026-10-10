@@ -58,7 +58,7 @@ public class ToggleNametagsClient implements ClientModInitializer {
         //? if < 26.2 {
         //   context.getSource().getClient().schedule(() -> c.setScreen(new ConfigScreen(null, null)));
         //?} else
-        context.getSource().getClient().schedule(() -> c.setScreenAndShow(new ConfigScreen(null, null)));
+        context.getSource().getClient().schedule(() -> c.gui.setScreen(new ConfigScreen(null, null)));
 
         return 1;
       }));

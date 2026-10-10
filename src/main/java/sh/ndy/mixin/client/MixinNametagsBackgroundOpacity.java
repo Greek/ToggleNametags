@@ -3,7 +3,10 @@ package sh.ndy.mixin.client;
 //? if < 26.2 {
 /* import com.llamalad7.mixinextras.injector.ModifyExpressionValue; */
 //?}
-import net.minecraft.client.renderer.feature.NameTagFeatureRenderer;
+//? if < 26.3 {
+/* import net.minecraft.client.renderer.feature.NameTagFeatureRenderer; */
+//?}
+import net.minecraft.client.renderer.feature.TextFeatureRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,8 +15,10 @@ import sh.ndy.config.Config;
 
 //? if < 26.2 {
 /* @Mixin(NameTagFeatureRenderer.Storage.class) */
+//?} else if < 26.3 {
+/* @Mixin(NameTagFeatureRenderer.class) */
 //?} else {
-@Mixin(NameTagFeatureRenderer.class)
+@Mixin(TextFeatureRenderer.class)
 //?}
 public class MixinNametagsBackgroundOpacity {
   //? if < 26.2 {
@@ -34,7 +39,7 @@ public class MixinNametagsBackgroundOpacity {
   }
   *///?} else {
   @ModifyArg(
-      method = "prepareText",
+      method = "renderText",
       at = @At(
           value = "INVOKE",
           target = TARGET
