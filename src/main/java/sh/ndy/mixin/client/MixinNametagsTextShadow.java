@@ -1,5 +1,8 @@
 package sh.ndy.mixin.client;
 
+//? if < 26.2 {
+/* import net.minecraft.client.renderer.feature.NameTagFeatureRenderer; */
+//?}
 import net.minecraft.client.renderer.feature.TextFeatureRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -7,7 +10,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import sh.ndy.features.listeners.NametagsTextShadowListener;
 
+//? if < 26.3 {
+  /* @Mixin(NameTagFeatureRenderer.class) */
+//?} else {
 @Mixin(TextFeatureRenderer.class)
+//?}
 public class MixinNametagsTextShadow {
   //? if < 26.2 {
   /* @Unique private static final String TARGET =

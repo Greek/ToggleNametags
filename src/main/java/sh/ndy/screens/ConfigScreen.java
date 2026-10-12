@@ -63,57 +63,15 @@ public class ConfigScreen extends Screen {
     grid.defaultCellSetting().padding(4, 4, 4, 2);
     GridLayout.RowHelper adder = grid.createRowHelper(2);
 
-    Button renderNametagsBtnWidget = Button.builder(getRenderNametagsText(), (btn) -> {
-      Config.getOptions().setRenderNametags(!Config.getOptions().getRenderNametags());
-      Config.saveConfig();
-      btn.setFocused(false);
-      btn.setMessage(getRenderNametagsText());
-    }).width(STANDARD_BTN_WIDTH).build();
-
-    Button renderSelfNametagsBtnWidget = Button.builder(getRenderSelfNametagText(), (btn) -> {
-      Config.getOptions().setRenderSelfNametag(!Config.getOptions().getRenderSelfNametag());
-      Config.saveConfig();
-      btn.setFocused(false);
-      btn.setMessage(getRenderSelfNametagText());
-    }).width(STANDARD_BTN_WIDTH).build();
-
-    Button renderNametagShadowBtnWidget = Button.builder(getRenderNametagShadowText(), (btn) -> {
-      Config.getOptions().setRenderNametagTextShadow(!Config.getOptions().getRenderNametagTextShadow());
-      Config.saveConfig();
-      btn.setFocused(false);
-      btn.setMessage(getRenderNametagShadowText());
-    }).width(STANDARD_BTN_WIDTH).build();
-
-    Button renderBossbarBtnWidget = Button.builder(getRenderBossbarText(), (btn) -> {
-      Config.getOptions().setRenderBossbar(!Config.getOptions().getRenderBossbar());
-      Config.saveConfig();
-      btn.setFocused(false);
-      btn.setMessage(getRenderBossbarText());
-    }).width(FULL_BTN_WIDTH).build();
-
-
+    Button renderNametagsBtnWidget = Button.builder(getRenderNametagsText(), (btn) -> this.updateRenderNametagsConfig(btn)).width(STANDARD_BTN_WIDTH).build();
+    Button renderSelfNametagsBtnWidget = Button.builder(getRenderSelfNametagText(), (btn) -> this.updateRenderSelfNametagsConfig(btn)).width(STANDARD_BTN_WIDTH).build();
+    Button renderNametagShadowBtnWidget = Button.builder(getRenderNametagShadowText(), (btn) -> this.updateNametagShadowConfig(btn)).width(STANDARD_BTN_WIDTH).build();
+    Button renderBossbarBtnWidget = Button.builder(getRenderBossbarText(), (btn) -> this.updateRenderBossbarConfig(btn)).width(FULL_BTN_WIDTH).build();
+    Button renderNametagBackgroundBtnWidget = Button.builder(getEnableNametagBackground(), (btn) -> updateNametagBackgroundConfig(btn)).width(STANDARD_BTN_WIDTH).build();
     Button backBtn = Button.builder(this.backText, (btn) -> this.onClose()).width(STANDARD_BTN_WIDTH).build();
 
-    AbstractSliderButton nametagOpacitySlider =
-        new AbstractSliderButton(this.width / 2, 185, 162, 20, getNametagOpacityText(), calcNametagOpacityDisplayVal()) {
-          @Override
-          protected void updateMessage() {
-            this.setMessage(getNametagOpacityText());
-          }
+    AbstractSliderButton nametagOpacitySlider = new NametagOpacitySlider(STANDARD_BTN_WIDTH);
 
-          @Override
-          protected void applyValue() {
-            Config.getOptions().setNametagOpacity((float) this.value);
-            Config.saveConfig();
-          }
-        };
-
-    Button renderNametagBackground = Button.builder(getEnableNametagBackground(), (btn) -> {
-      Config.getOptions().setNametagBackgroundEnabled(!Config.getOptions().getNametagBackgroundEnabled());
-      Config.saveConfig();
-      btn.setFocused(false);
-      btn.setMessage(getEnableNametagBackground());
-    }).width(STANDARD_BTN_WIDTH).build();
 
     // TODO: Find a way to remove Essential's padding around the nametags, so we don't have to disable
     //       this option when Essential is loaded.
@@ -130,7 +88,7 @@ public class ConfigScreen extends Screen {
     //? if < 26.2 {
     /* adder.addChild(nametagOpacitySlider); */
     //?} else
-    adder.addChild(renderNametagBackground);
+    adder.addChild(renderNametagBackgroundBtnWidget);
 
     adder.addChild(renderBossbarBtnWidget, 2);
 
@@ -155,5 +113,57 @@ public class ConfigScreen extends Screen {
     // this.minecraft.setScreen(parent);
     //?} else
     this.minecraft.gui.setScreen(parent);
+  }
+
+  private void updateRenderNametagsConfig(Button btn) {
+    Config.getOptions().setRenderNametags(!Config.getOptions().getRenderNametags());
+    Config.saveConfig();
+    btn.setFocused(false);
+    btn.setMessage(getRenderNametagsText());
+  }
+
+  private void updateRenderSelfNametagsConfig(Button btn) {
+    Config.getOptions().setRenderSelfNametag(!Config.getOptions().getRenderSelfNametag());
+    Config.saveConfig();
+    btn.setFocused(false);
+    btn.setMessage(getRenderSelfNametagText());
+  }
+
+  private void updateNametagShadowConfig(Button btn) {
+    Config.getOptions().setRenderNametagTextShadow(!Config.getOptions().getRenderNametagTextShadow());
+    Config.saveConfig();
+    btn.setFocused(false);
+    btn.setMessage(getRenderNametagShadowText());
+  }
+
+  private void updateRenderBossbarConfig(Button btn) {
+    Config.getOptions().setRenderBossbar(!Config.getOptions().getRenderBossbar());
+    Config.saveConfig();
+    btn.setFocused(false);
+    btn.setMessage(getRenderBossbarText());
+  }
+
+  private void updateNametagBackgroundConfig(Button btn) {
+    Config.getOptions().setNametagBackgroundEnabled(!Config.getOptions().getNametagBackgroundEnabled());
+    Config.saveConfig();
+    btn.setFocused(false);
+    btn.setMessage(getEnableNametagBackground());
+  }
+
+  private class NametagOpacitySlider extends AbstractSliderButton {
+    NametagOpacitySlider(int buttonWidth) {
+      super(buttonWidth / 2, 185, 162, 20, getNametagOpacityText(), calcNametagOpacityDisplayVal());
+    }
+
+    @Override
+    protected void updateMessage() {
+      this.setMessage(getNametagOpacityText());
+    }
+
+    @Override
+    protected void applyValue() {
+      Config.getOptions().setNametagOpacity((float) this.value);
+      Config.saveConfig();
+    }
   }
 }
