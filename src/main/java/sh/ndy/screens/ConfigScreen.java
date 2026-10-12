@@ -86,8 +86,8 @@ public class ConfigScreen extends Screen {
     adder.addChild(renderNametagShadowBtnWidget);
 
     //? if < 26.2 {
-    /* adder.addChild(nametagOpacitySlider); */
-    //?} else
+     /*adder.addChild(nametagOpacitySlider); 
+    *///?} else
     adder.addChild(renderNametagBackgroundBtnWidget);
 
     adder.addChild(renderBossbarBtnWidget, 2);
@@ -110,8 +110,8 @@ public class ConfigScreen extends Screen {
   @Override
   public void onClose() {
     //? if < 26.2 {
-    // this.minecraft.setScreen(parent);
-    //?} else
+     /*this.minecraft.setScreen(parent);
+    *///?} else
     this.minecraft.gui.setScreen(parent);
   }
 

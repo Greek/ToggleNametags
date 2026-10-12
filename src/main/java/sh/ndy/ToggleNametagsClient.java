@@ -56,8 +56,8 @@ public class ToggleNametagsClient implements ClientModInitializer {
     ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
       dispatcher.register(ClientCommands.literal("ntconfig").executes(context -> {
         //? if < 26.2 {
-        //   context.getSource().getClient().schedule(() -> c.setScreen(new ConfigScreen(null, null)));
-        //?} else
+           /*context.getSource().getClient().schedule(() -> c.setScreen(new ConfigScreen(null, null)));
+        *///?} else
         context.getSource().getClient().schedule(() -> c.gui.setScreen(new ConfigScreen(null, null)));
 
         return 1;
