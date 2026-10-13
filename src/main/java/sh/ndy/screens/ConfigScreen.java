@@ -54,10 +54,6 @@ public class ConfigScreen extends Screen {
         "Show nametag text shadow: " + (Config.getOptions().getRenderNametagTextShadow() ? "§aYes" : "§cNo"));
   }
 
-  private Component getEnableNametagBackground() {
-    return Component.nullToEmpty("Show nametag background: " + (Config.getOptions().getNametagBackgroundEnabled() ? "§aYes" : "§cNo"));
-  }
-
   protected void init() {
     GridLayout grid = new GridLayout();
     grid.defaultCellSetting().padding(4, 4, 4, 2);
@@ -67,7 +63,6 @@ public class ConfigScreen extends Screen {
     Button renderSelfNametagsBtnWidget = Button.builder(getRenderSelfNametagText(), (btn) -> this.updateRenderSelfNametagsConfig(btn)).width(STANDARD_BTN_WIDTH).build();
     Button renderNametagShadowBtnWidget = Button.builder(getRenderNametagShadowText(), (btn) -> this.updateNametagShadowConfig(btn)).width(STANDARD_BTN_WIDTH).build();
     Button renderBossbarBtnWidget = Button.builder(getRenderBossbarText(), (btn) -> this.updateRenderBossbarConfig(btn)).width(FULL_BTN_WIDTH).build();
-    Button renderNametagBackgroundBtnWidget = Button.builder(getEnableNametagBackground(), (btn) -> updateNametagBackgroundConfig(btn)).width(STANDARD_BTN_WIDTH).build();
     Button backBtn = Button.builder(this.backText, (btn) -> this.onClose()).width(STANDARD_BTN_WIDTH).build();
 
     AbstractSliderButton nametagOpacitySlider = new NametagOpacitySlider(STANDARD_BTN_WIDTH);
@@ -84,12 +79,7 @@ public class ConfigScreen extends Screen {
     adder.addChild(renderNametagsBtnWidget);
     adder.addChild(renderSelfNametagsBtnWidget);
     adder.addChild(renderNametagShadowBtnWidget);
-
-    //? if < 26.2 {
-     /*adder.addChild(nametagOpacitySlider); 
-    *///?} else
-    adder.addChild(renderNametagBackgroundBtnWidget);
-
+    adder.addChild(nametagOpacitySlider);
     adder.addChild(renderBossbarBtnWidget, 2);
 
     grid.arrangeElements();
@@ -141,13 +131,6 @@ public class ConfigScreen extends Screen {
     Config.saveConfig();
     btn.setFocused(false);
     btn.setMessage(getRenderBossbarText());
-  }
-
-  private void updateNametagBackgroundConfig(Button btn) {
-    Config.getOptions().setNametagBackgroundEnabled(!Config.getOptions().getNametagBackgroundEnabled());
-    Config.saveConfig();
-    btn.setFocused(false);
-    btn.setMessage(getEnableNametagBackground());
   }
 
   private class NametagOpacitySlider extends AbstractSliderButton {

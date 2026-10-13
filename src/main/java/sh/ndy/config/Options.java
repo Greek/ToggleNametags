@@ -44,10 +44,12 @@ public class Options {
     this.nametagOpacity = (Math.floor(newOpacity * 100.0) / 100.0) * Constants.NAMETAG_OPACITY_MULTIPLIER;
   }
 
+  // TODO: Remove
   public boolean getNametagBackgroundEnabled() {
     return this.nametagBackgroundEnabled;
   }
 
+  // TODO: Remove
   public void setNametagBackgroundEnabled(boolean enabled) {
     this.nametagBackgroundEnabled = enabled;
   }
